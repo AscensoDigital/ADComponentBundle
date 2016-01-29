@@ -1,0 +1,33 @@
+services:
+#    service_name:
+#        class: AppBundle\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+  ad_component.object_hidden.type:
+        class: AscensoDigital\Component\Form\Type\ObjectHiddenType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: object_hidden }
+
+  ad_component.datetime_hidden.type:
+        class: AscensoDigital\Component\Form\Type\DateTimeHiddenType
+        tags:
+            - { name: form.type, alias: datetime_hidden }
+
+  ad_component.object_text.type:
+        class: AscensoDigital\Component\Form\Type\ObjectTextType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: object_text }
+
+  ad_component.object_text_campo.type:
+        class: AscensoDigital\Component\Form\Type\ObjectTextCampoType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: object_text_campo }
+
+  ad_component.twig_extension:
+        class: AscensoDigital\Component\Twig\ADExtension
+        public: false
+        tags:
+            - { name: twig.extension }
