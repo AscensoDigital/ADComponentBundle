@@ -1,0 +1,8 @@
+{% block icon_widget %}
+    {% spaceless %}
+        <div class="input-group">
+            <span class="input-group-addon"><i {% if value is not empty %}class="{{ value }}"{% endif %}></i></span>
+            {{- block('form_widget_simple') -}}
+        </div>
+    {% endspaceless %}
+{% endblock %}
