@@ -1,5 +1,5 @@
 {
-    "name": "ascensodigital/component",
+    "name": "ascensodigital/component-bundle",
     "type": "library",
     "description": "Libreria extensiones de form twig y doctrine",
     "keywords": ["libreria extensiones"],
