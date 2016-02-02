@@ -1,0 +1,24 @@
+{% block form_row -%}
+    {% spaceless %}
+        <div class="form-group{% if (not compound or force_error|default(false)) and not valid %} has-error{% endif %}">
+            {{ form_label(form) }}
+            <div class="{{ block('form_group_class') }}">
+                {{ form_widget(form) }}
+                {{ form_errors(form) }}
+                {% if help is defined %}
+                    <em class="bg-info">{{ help }}</em>
+                {% endif %}
+            </div>
+        </div>
+    {% endspaceless %}
+{%- endblock form_row %}
+
+
+{% block icon_widget %}
+    {% spaceless %}
+        <div class="input-group">
+            <span class="input-group-addon"><i {% if value is not empty %}class="{{ value }}"{% endif %}></i></span>
+            {{- block('form_widget_simple') -}}
+        </div>
+    {% endspaceless %}
+{% endblock %}
