@@ -13,12 +13,25 @@
     {% endspaceless %}
 {%- endblock form_row %}
 
+{% block form_widget_simple -%}
+    {% if pre_addon is not empty or post_addon is not empty %}
+        <div class="input-group">
+            {% if pre_addon is not empty %}
+                <span class="input-group-addon">{{ pre_addon }}</span>
+            {% endif %}
+            {{- parent() -}}
+            {% if post_addon is not empty %}
+                <span class="input-group-addon">{{ post_addon }}</span>
+            {% endif %}
+        </div>
+    {% else %}
+        {{- parent() -}}
+    {% endif %}
+{%- endblock form_widget_simple %}
 
 {% block icon_widget %}
-    {% spaceless %}
-        <div class="input-group">
-            <span class="input-group-addon"><i {% if value is not empty %}class="{{ value }}"{% endif %}></i></span>
-            {{- block('form_widget_simple') -}}
-        </div>
-    {% endspaceless %}
+    {% if value is not empty %}
+        {% set pre_addon = '<i class="' ~ value | trim ~ '"></i>' %}
+    {% endif %}
+    {{- block('form_widget_simple') -}}
 {% endblock %}

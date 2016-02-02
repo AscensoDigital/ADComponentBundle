@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: claudio
  * Date: 02-02-16
- * Time: 14:55
+ * Time: 15:26
  */
 
 namespace AscensoDigital\ComponentBundle\Form\Extension;
@@ -15,24 +15,25 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class HelpTypeExtension extends AbstractTypeExtension
-{
+class InputAddonTypeExtension extends AbstractTypeExtension {
+
     /**
      * Returns the name of the type being extended.
      *
      * @return string The name of the type being extended
      */
-    public function getExtendedType() {
+    public function getExtendedType()
+    {
         return FormType::class;
     }
 
     /**
-     * Add the help option
+     * Add the [pre_addon|post_addon] option
      *
      * @param OptionsResolver $resolver
      */
     public function configureOptions(OptionsResolver $resolver) {
-        $resolver->setDefined(['help']);
+        $resolver->setDefined(['pre_addon', 'post_addon']);
     }
 
     /**
@@ -43,8 +44,11 @@ class HelpTypeExtension extends AbstractTypeExtension
      * @param array $options
      */
     public function buildView(FormView $view, FormInterface $form, array $options) {
-        if (array_key_exists('help', $options)) {
-            $view->vars['help'] = $options['help'];
+        if (array_key_exists('pre_addon', $options)) {
+            $view->vars['pre_addon'] = $options['pre_addon'];
+        }
+        if (array_key_exists('post_addon', $options)) {
+            $view->vars['post_addon'] = $options['post_addon'];
         }
     }
 }
