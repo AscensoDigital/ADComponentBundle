@@ -9,8 +9,9 @@
 namespace AscensoDigital\ComponentBundle\Form\Type;
 
 
-use Doctrine\DBAL\Types\TextType;
+
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class IconType extends AbstractType
 {
