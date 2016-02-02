@@ -33,7 +33,8 @@ class InputAddonTypeExtension extends AbstractTypeExtension {
      * @param OptionsResolver $resolver
      */
     public function configureOptions(OptionsResolver $resolver) {
-        $resolver->setDefined(['pre_addon', 'post_addon']);
+        $resolver->setDefined('pre_addon')
+            ->setDefined('post_addon');
     }
 
     /**

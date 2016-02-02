@@ -31,13 +31,3 @@ services:
         public: false
         tags:
             - { name: twig.extension }
-
-  ad_component.help_type_extension:
-        class: AscensoDigital\ComponentBundle\Form\Extension\HelpTypeExtension
-        tags:
-            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
-
-  ad_component.help_type_extension:
-        class: AscensoDigital\ComponentBundle\Form\Extension\InputAddonTypeExtension
-        tags:
-            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }

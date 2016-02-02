@@ -1,4 +1,4 @@
-{% extends 'bootstrap_3_layout.html.twig' %}
+{% extends 'bootstrap_3_horizontal_layout.html.twig' %}
 
 {% block form_row -%}
     {% spaceless %}
@@ -16,14 +16,14 @@
 {%- endblock form_row %}
 
 {% block form_widget_simple -%}
-    {% if pre_addon is not empty or post_addon is not empty %}
+    {% if pre_addon is defined or post_addon is defined %}
         <div class="input-group">
-            {% if pre_addon is not empty %}
-                <span class="input-group-addon">{{ pre_addon }}</span>
+            {% if pre_addon is defined %}
+                <span class="input-group-addon">{{ pre_addon | raw }}</span>
             {% endif %}
             {{- parent() -}}
-            {% if post_addon is not empty %}
-                <span class="input-group-addon">{{ post_addon }}</span>
+            {% if post_addon is defined %}
+                <span class="input-group-addon">{{ post_addon | raw }}</span>
             {% endif %}
         </div>
     {% else %}
