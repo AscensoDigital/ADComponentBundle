@@ -32,7 +32,7 @@ class HelpTypeExtension extends AbstractTypeExtension
      * @param OptionsResolver $resolver
      */
     public function configureOptions(OptionsResolver $resolver) {
-        $resolver->setDefined(['help']);
+        $resolver->setDefined('help');
     }
 
     /**
