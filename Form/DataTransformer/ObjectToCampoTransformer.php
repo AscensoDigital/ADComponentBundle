@@ -1,6 +1,6 @@
 <?php
 
-namespace AscensoDigital\Component\Form\DataTransformer;
+namespace AscensoDigital\ComponentBundle\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;

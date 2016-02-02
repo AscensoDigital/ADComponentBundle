@@ -1,5 +1,5 @@
 <?php
-namespace AscensoDigital\Component\Doctrine\DQL;
+namespace AscensoDigital\ComponentBundle\Doctrine\DQL;
 
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\ORM\Query\Lexer;

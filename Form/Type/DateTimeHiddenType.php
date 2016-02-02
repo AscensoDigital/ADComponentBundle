@@ -1,6 +1,6 @@
 <?php
 
-namespace AscensoDigital\Component\Form\Type;
+namespace AscensoDigital\ComponentBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

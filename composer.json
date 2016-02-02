@@ -1,8 +1,8 @@
 {
     "name": "ascensodigital/component-bundle",
-    "type": "library",
-    "description": "Libreria extensiones de form twig y doctrine",
-    "keywords": ["libreria extensiones"],
+    "type": "symfony-bundle",
+    "description": "Symfony Bundle con extensiones de form twig y doctrine",
+    "keywords": ["bundle extensiones"],
     "homepage": "http://ascensodigital.github.com",
     "license": "MIT",
     "authors": [
@@ -19,6 +19,6 @@
         "doctrine/doctrine-bundle": "~1.4"
     },
     "autoload": {
-        "psr-4": { "AscensoDigital\\Component\\": "" }
+        "psr-4": { "AscensoDigital\\ComponentBundle\\": "" }
     }
 }

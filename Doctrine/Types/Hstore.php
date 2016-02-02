@@ -1,6 +1,6 @@
 <?php
 
-namespace AscensoDigital\Component\Doctrine\Types;
+namespace AscensoDigital\ComponentBundle\Doctrine\Types;
 
 use Doctrine\DBAL\Types\Type;
 use Doctrine\DBAL\Platforms\AbstractPlatform;

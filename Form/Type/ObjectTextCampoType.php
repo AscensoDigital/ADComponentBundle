@@ -1,11 +1,11 @@
 <?php
 
-namespace AscensoDigital\Component\Form\Type;
+namespace AscensoDigital\ComponentBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use AscensoDigital\Component\Form\DataTransformer\ObjectToCampoTransformer;
+use AscensoDigital\ComponentBundle\Form\DataTransformer\ObjectToCampoTransformer;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**

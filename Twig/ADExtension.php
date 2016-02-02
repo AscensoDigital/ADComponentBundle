@@ -6,7 +6,7 @@
  * Time: 3:18
  */
 
-namespace AscensoDigital\Component\Twig;
+namespace AscensoDigital\ComponentBundle\Twig;
 
 
 class ADExtension extends \Twig_Extension {

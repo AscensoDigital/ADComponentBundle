@@ -1,6 +1,6 @@
 <?php
 
-namespace AscensoDigital\Component\DependencyInjection;
+namespace AscensoDigital\ComponentBundle\DependencyInjection;
 
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;

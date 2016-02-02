@@ -6,7 +6,7 @@
  * Time: 11:30
  */
 
-namespace AscensoDigital\Component\Form\Type;
+namespace AscensoDigital\ComponentBundle\Form\Type;
 
 
 use Doctrine\DBAL\Types\TextType;
