@@ -34,7 +34,9 @@ class InputAddonTypeExtension extends AbstractTypeExtension {
      */
     public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefined('pre_addon')
-            ->setDefined('post_addon');
+            ->setDefined('pre_addon_icon')
+            ->setDefined('post_addon')
+            ->setDefined('post_addon_icon');
     }
 
     /**
@@ -50,6 +52,12 @@ class InputAddonTypeExtension extends AbstractTypeExtension {
         }
         if(isset($options['post_addon'])) {
             $view->vars['post_addon'] = $options['post_addon'];
+        }
+        if(isset($options['pre_addon_icon'])) {
+            $view->vars['pre_addon_icon'] = $options['pre_addon_icon'];
+        }
+        if(isset($options['post_addon_icon'])) {
+            $view->vars['post_addon_icon'] = $options['post_addon_icon'];
         }
     }
 }

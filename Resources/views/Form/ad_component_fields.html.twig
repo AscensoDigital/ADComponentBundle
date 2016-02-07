@@ -18,11 +18,15 @@
 {% block form_widget_simple -%}
     {% if pre_addon is defined or post_addon is defined %}
         <div class="input-group">
-            {% if pre_addon is defined %}
+            {% if pre_addon_icon is defined %}
+                <span class="input-group-addon"><i class="{{ pre_addon_icon }}"></i></span>
+            {% elseif pre_addon is defined %}
                 <span class="input-group-addon">{{ pre_addon | raw }}</span>
             {% endif %}
             {{- parent() -}}
-            {% if post_addon is defined %}
+            {% if post_addon_icon is defined %}
+                <span class="input-group-addon"><i class="{{ post_addon_icon }}"></i></span>
+            {% elseif post_addon is defined %}
                 <span class="input-group-addon">{{ post_addon | raw }}</span>
             {% endif %}
         </div>
@@ -33,7 +37,7 @@
 
 {% block icon_widget %}
     {% if value is not empty %}
-        {% set pre_addon = '<i class="' ~ value | trim ~ '"></i>' %}
+        {% set pre_addon_icon = value | trim %}
     {% endif %}
     {{- block('form_widget_simple') -}}
 {% endblock %}
