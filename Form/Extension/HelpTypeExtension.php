@@ -32,7 +32,7 @@ class HelpTypeExtension extends AbstractTypeExtension
      * @param OptionsResolver $resolver
      */
     public function configureOptions(OptionsResolver $resolver) {
-        $resolver->setDefined('help');
+        $resolver->setDefined('ad_component_help');
     }
 
     /**
@@ -43,8 +43,8 @@ class HelpTypeExtension extends AbstractTypeExtension
      * @param array $options
      */
     public function buildView(FormView $view, FormInterface $form, array $options) {
-        if (array_key_exists('help', $options)) {
-            $view->vars['help'] = $options['help'];
+        if (array_key_exists('ad_component_help', $options)) {
+            $view->vars['ad_component_help'] = $options['ad_component_help'];
         }
     }
 }
