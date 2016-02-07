@@ -1,22 +1,16 @@
 {% extends 'bootstrap_3_horizontal_layout.html.twig' %}
 
-{% block form_row -%}
+{% block form_widget -%}
     {% spaceless %}
-        <div class="form-group{% if (not compound or force_error|default(false)) and not valid %} has-error{% endif %}">
-            {{ form_label(form) }}
-            <div class="{{ block('form_group_class') }}">
-                {{ form_widget(form) }}
-                {{ form_errors(form) }}
-                {% if help is defined %}
-                    <em class="bg-info">{{ help }}</em>
-                {% endif %}
-            </div>
-        </div>
+        {{- parent() -}}
+        {% if help is defined and not (pre_addon is defined or pre_addon_icon is defined or post_addon is defined or post_addon_icon is defined) %}
+            <div class="bg-info">{{ help }}</div>
+        {% endif %}
     {% endspaceless %}
-{%- endblock form_row %}
+{%- endblock form_widget %}
 
 {% block form_widget_simple -%}
-    {% if pre_addon is defined or post_addon is defined %}
+    {% if pre_addon is defined or pre_addon_icon is defined or post_addon is defined or post_addon_icon is defined %}
         <div class="input-group">
             {% if pre_addon_icon is defined %}
                 <span class="input-group-addon"><i class="{{ pre_addon_icon }}"></i></span>
@@ -30,6 +24,9 @@
                 <span class="input-group-addon">{{ post_addon | raw }}</span>
             {% endif %}
         </div>
+        {% if help is defined %}
+            <div class="bg-info">{{ help }}</div>
+        {% endif %}
     {% else %}
         {{- parent() -}}
     {% endif %}
