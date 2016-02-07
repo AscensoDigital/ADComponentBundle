@@ -45,7 +45,11 @@ class InputAddonTypeExtension extends AbstractTypeExtension {
      * @param array $options
      */
     public function buildView(FormView $view, FormInterface $form, array $options) {
-        $view->vars['pre_addon'] = isset($options['pre_addon']) ? $options['pre_addon'] : null;
-        $view->vars['post_addon'] = isset($options['post_addon']) ? $options['post_addon'] : null;
+        if(isset($options['pre_addon'])) {
+            $view->vars['pre_addon'] = $options['pre_addon'];
+        }
+        if(isset($options['post_addon'])) {
+            $view->vars['post_addon'] = $options['post_addon'];
+        }
     }
 }
