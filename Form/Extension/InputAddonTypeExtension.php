@@ -37,7 +37,8 @@ class InputAddonTypeExtension extends AbstractTypeExtension {
         $resolver->setDefined('ad_component_addon') # pre|post|both
             ->setDefined('ad_component_addon_type') # text|button|icon
             ->setDefined('ad_component_addon_content_type') # text|icon
-            ->setDefined('ad_component_addon_content');
+            ->setDefined('ad_component_addon_content')
+            ->setDefined('ad_component_addon_attr');
         $resolver->setDefaults([
            'ad_component_addon_type' => ['pre' => 'text', 'post' => 'text'],
             'ad_component_addon_content_type' => ['pre' => 'text', 'post' => 'text']
@@ -53,7 +54,6 @@ class InputAddonTypeExtension extends AbstractTypeExtension {
      */
     public function buildView(FormView $view, FormInterface $form, array $options) {
         if(isset($options['ad_component_addon'])) {
-            $addons=array();
             switch ($options['ad_component_addon']) {
                 case 'pre':
                 case 'post':
@@ -76,7 +76,7 @@ class InputAddonTypeExtension extends AbstractTypeExtension {
                 $view->vars['ad_component_addon_content_type_'.$addon] = is_array($options['ad_component_addon_content_type']) ?
                     (isset($options['ad_component_addon_content_type'][$addon]) ? $options['ad_component_addon_content_type'][$addon] : null) :
                     $options['ad_component_addon_content_type'];
-                if(is_null($view->vars['ad_component_addon_content_type_'.$addon])){
+                if($view->vars['ad_component_addon_type_'.$addon]=='button' && is_null($view->vars['ad_component_addon_content_type_'.$addon])){
                     throw new LogicException('Falta Parámetro "ad_component_addon_content_type" para "'.$addon.'" addon');
                 }
 
@@ -86,6 +86,10 @@ class InputAddonTypeExtension extends AbstractTypeExtension {
                 if(is_null($view->vars['ad_component_addon_content_'.$addon])){
                     throw new LogicException('Falta Parámetro "ad_component_addon_content" para "'.$addon.'" addon');
                 }
+
+                $view->vars['ad_component_addon_attr_'.$addon] = isset($options['ad_component_addon_attr']) ?
+                    (isset($options['ad_component_addon_attr'][$addon]) ? $options['ad_component_addon_attr'][$addon] : $options['ad_component_addon_attr']) :
+                    array();
             }
         }
     }

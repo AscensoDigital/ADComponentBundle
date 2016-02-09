@@ -15,9 +15,12 @@
             {% if ad_component_addon_type_pre is defined -%}
                 <span class="input-group-{{ ad_component_addon_type_pre=='button' ? 'btn' : 'addon' }}">
                     {% if ad_component_addon_type_pre == 'icon' %}
-                        <i class="{{ ad_component_addon_content_pre }}"></i>
+                        {% set ad_component_addon_attr_pre = ad_component_addon_attr_pre|merge({class: (ad_component_addon_attr_pre.class|default('') ~ ' ' ~ ad_component_addon_content_pre)|trim}) %}
+                        <i {% for attrname, attrvalue in ad_component_addon_attr_pre %} {{ attrname }}="{{ attrvalue }}"{% endfor %}></i>
                     {% elseif ad_component_addon_type_pre == 'button' %}
-                        <button class="btn btn-default" type="button">
+                        {% set ad_component_addon_attr_pre = ad_component_addon_attr_pre|merge({class: (ad_component_addon_attr_pre.class|default('btn-default') ~ ' btn')|trim}) %}
+                        {% set ad_component_addon_attr_pre = ad_component_addon_attr_pre|merge({type: (ad_component_addon_attr_pre.type|default('') ~ ' button')|trim}) %}
+                        <button {% for attrname, attrvalue in ad_component_addon_attr_pre %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
                         {% if ad_component_addon_content_type_pre == 'icon' %}
                             <i class="{{ ad_component_addon_content_pre }}"></i>
                         {% else %}
@@ -33,14 +36,17 @@
             {% if ad_component_addon_type_post is defined -%}
                 <span class="input-group-{{ ad_component_addon_type_post=='button' ? 'btn' : 'addon' }}">
                     {% if ad_component_addon_type_post == 'icon' %}
-                        <i class="{{ ad_component_addon_content_post }}"></i>
+                        {% set ad_component_addon_attr_post = ad_component_addon_attr_post|merge({class: (ad_component_addon_attr_post.class|default('') ~ ' ' ~ ad_component_addon_content_post)|trim}) %}
+                        <i {% for attrname, attrvalue in ad_component_addon_attr_post %} {{ attrname }}="{{ attrvalue }}"{% endfor %}></i>
                     {% elseif ad_component_addon_type_post == 'button' %}
-                        <button class="btn btn-default" type="button">
-                            {% if ad_component_addon_content_type_post == 'icon' %}
-                                <i class="{{ ad_component_addon_content_post }}"></i>
-                            {% else %}
-                                {{ ad_component_addon_content_post }}
-                            {% endif %}
+                        {% set ad_component_addon_attr_post = ad_component_addon_attr_post|merge({class: (ad_component_addon_attr_post.class|default('btn-default') ~ ' btn')|trim}) %}
+                        {% set ad_component_addon_attr_post = ad_component_addon_attr_post|merge({type: (ad_component_addon_attr_post.type|default('') ~ ' button')|trim}) %}
+                        <button {% for attrname, attrvalue in ad_component_addon_attr_post %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+                        {% if ad_component_addon_content_type_post == 'icon' %}
+                            <i class="{{ ad_component_addon_content_post }}"></i>
+                        {% else %}
+                            {{ ad_component_addon_content_post }}
+                        {% endif %}
                         </button>
                     {% else %}
                         {{ ad_component_addon_content_post }}
