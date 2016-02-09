@@ -63,21 +63,29 @@ class InputAddonTypeExtension extends AbstractTypeExtension {
                     $addons=['pre','post'];
                     break;
                 default:
-                    throw new LogicException('Valor "'.$options['ad_component_addon'].'" parametro "ad_component_addon" no válido. Valores posibles: pre|post|both');
+                    throw new LogicException('Valor "'.$options['ad_component_addon'].'" parámetro "ad_component_addon" no válido. Valores permitidos: pre|post|both');
             }
             foreach ($addons as $addon) {
                 $view->vars['ad_component_addon_type_'.$addon] = is_array($options['ad_component_addon_type']) ?
                     (isset($options['ad_component_addon_type'][$addon]) ? $options['ad_component_addon_type'][$addon] : null) :
                     $options['ad_component_addon_type'];
                 if(is_null($view->vars['ad_component_addon_type_'.$addon])){
-                    throw new LogicException('Falta Parámetro "ad_component_addon_type" para "'.$addon.'" addon');
+                    throw new LogicException('Falta parámetro "ad_component_addon_type" para "'.$addon.'" addon');
+                }
+                elseif(!in_array($view->vars['ad_component_addon_type_'.$addon], ['text','button','icon'])){
+                    throw new LogicException('Valor "'.$view->vars['ad_component_addon_type_'.$addon].'" parámetro "ad_component_addon_type" para "'.$addon.'" addon no válido. Valores permitidos: text|button|icon');
                 }
 
                 $view->vars['ad_component_addon_content_type_'.$addon] = is_array($options['ad_component_addon_content_type']) ?
                     (isset($options['ad_component_addon_content_type'][$addon]) ? $options['ad_component_addon_content_type'][$addon] : null) :
                     $options['ad_component_addon_content_type'];
-                if($view->vars['ad_component_addon_type_'.$addon]=='button' && is_null($view->vars['ad_component_addon_content_type_'.$addon])){
-                    throw new LogicException('Falta Parámetro "ad_component_addon_content_type" para "'.$addon.'" addon');
+                if($view->vars['ad_component_addon_type_'.$addon]=='button') {
+                    if(is_null($view->vars['ad_component_addon_content_type_'.$addon])) {
+                        throw new LogicException('Falta Parámetro "ad_component_addon_content_type" para "' . $addon . '" addon');
+                    }
+                    elseif(!in_array($view->vars['ad_component_addon_content_type_'.$addon], ['text','icon'])) {
+                        throw new LogicException('Valor "'.$view->vars['ad_component_addon_content_type_'.$addon].'" parámetro "ad_component_addon_content_type" para "'.$addon.'" addon no válido. Valores permitidos: text|icon');
+                    }
                 }
 
                 $view->vars['ad_component_addon_content_'.$addon] = is_array($options['ad_component_addon_content']) ?
