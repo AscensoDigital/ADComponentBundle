@@ -10,18 +10,42 @@
 {%- endblock form_widget %}
 
 {% block form_widget_simple -%}
-    {% if pre_addon is defined or pre_addon_icon is defined or post_addon is defined or post_addon_icon is defined %}
+    {% if ad_component_addon_type_pre is defined or ad_component_addon_type_post is defined %}
         <div class="input-group">
-            {% if pre_addon_icon is defined %}
-                <span class="input-group-addon"><i class="{{ pre_addon_icon }}"></i></span>
-            {% elseif pre_addon is defined %}
-                <span class="input-group-addon">{{ pre_addon | raw }}</span>
+            {% if ad_component_addon_type_pre is defined -%}
+                <span class="input-group-{{ ad_component_addon_type_pre=='button' ? 'btn' : 'addon' }}">
+                    {% if ad_component_addon_type_pre == 'icon' %}
+                        <i class="{{ ad_component_addon_content_pre }}"></i>
+                    {% elseif ad_component_addon_type_pre == 'button' %}
+                        <button class="btn btn-default" type="button">
+                        {% if ad_component_addon_content_type_pre == 'icon' %}
+                            <i class="{{ ad_component_addon_content_pre }}"></i>
+                        {% else %}
+                            {{ ad_component_addon_content_pre }}
+                        {% endif %}
+                        </button>
+                    {% else %}
+                        {{ ad_component_addon_content_pre }}
+                    {% endif %}
+                </span>
             {% endif %}
             {{- parent() -}}
-            {% if post_addon_icon is defined %}
-                <span class="input-group-addon"><i class="{{ post_addon_icon }}"></i></span>
-            {% elseif post_addon is defined %}
-                <span class="input-group-addon">{{ post_addon | raw }}</span>
+            {% if ad_component_addon_type_post is defined -%}
+                <span class="input-group-{{ ad_component_addon_type_post=='button' ? 'btn' : 'addon' }}">
+                    {% if ad_component_addon_type_post == 'icon' %}
+                        <i class="{{ ad_component_addon_content_post }}"></i>
+                    {% elseif ad_component_addon_type_post == 'button' %}
+                        <button class="btn btn-default" type="button">
+                            {% if ad_component_addon_content_type_post == 'icon' %}
+                                <i class="{{ ad_component_addon_content_post }}"></i>
+                            {% else %}
+                                {{ ad_component_addon_content_post }}
+                            {% endif %}
+                        </button>
+                    {% else %}
+                        {{ ad_component_addon_content_post }}
+                    {% endif %}
+                </span>
             {% endif %}
         </div>
         {% if ad_component_help is defined %}
@@ -33,8 +57,9 @@
 {%- endblock form_widget_simple %}
 
 {% block icon_widget %}
+    {% set ad_component_addon_type_pre = 'icon' %}
     {% if value is not empty %}
-        {% set pre_addon_icon = value | trim %}
+        {% set ad_component_addon_content_pre = value | trim %}
     {% endif %}
     {{- block('form_widget_simple') -}}
 {% endblock %}

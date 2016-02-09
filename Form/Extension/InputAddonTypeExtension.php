@@ -10,6 +10,7 @@ namespace AscensoDigital\ComponentBundle\Form\Extension;
 
 
 use Symfony\Component\Form\AbstractTypeExtension;
+use Symfony\Component\Form\Exception\LogicException;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -33,10 +34,14 @@ class InputAddonTypeExtension extends AbstractTypeExtension {
      * @param OptionsResolver $resolver
      */
     public function configureOptions(OptionsResolver $resolver) {
-        $resolver->setDefined('ad_component_addon')
-            ->setDefined('ad_component_addon_type')
-            ->setDefined('post_addon')
-            ->setDefined('post_addon_icon');
+        $resolver->setDefined('ad_component_addon') # pre|post|both
+            ->setDefined('ad_component_addon_type') # text|button|icon
+            ->setDefined('ad_component_addon_content_type') # text|icon
+            ->setDefined('ad_component_addon_content');
+        $resolver->setDefaults([
+           'ad_component_addon_type' => ['pre' => 'text', 'post' => 'text'],
+            'ad_component_addon_content_type' => ['pre' => 'text', 'post' => 'text']
+        ]);
     }
 
     /**
@@ -47,17 +52,41 @@ class InputAddonTypeExtension extends AbstractTypeExtension {
      * @param array $options
      */
     public function buildView(FormView $view, FormInterface $form, array $options) {
-        if(isset($options['pre_addon'])) {
-            $view->vars['pre_addon'] = $options['pre_addon'];
-        }
-        if(isset($options['post_addon'])) {
-            $view->vars['post_addon'] = $options['post_addon'];
-        }
-        if(isset($options['pre_addon_icon'])) {
-            $view->vars['pre_addon_icon'] = $options['pre_addon_icon'];
-        }
-        if(isset($options['post_addon_icon'])) {
-            $view->vars['post_addon_icon'] = $options['post_addon_icon'];
+        if(isset($options['ad_component_addon'])) {
+            $addons=array();
+            switch ($options['ad_component_addon']) {
+                case 'pre':
+                case 'post':
+                    $addons=[$options['ad_component_addon']];
+                    break;
+                case 'both':
+                    $addons=['pre','post'];
+                    break;
+                default:
+                    throw new LogicException('Valor "'.$options['ad_component_addon'].'" parametro "ad_component_addon" no válido. Valores posibles: pre|post|both');
+            }
+            foreach ($addons as $addon) {
+                $view->vars['ad_component_addon_type_'.$addon] = is_array($options['ad_component_addon_type']) ?
+                    (isset($options['ad_component_addon_type'][$addon]) ? $options['ad_component_addon_type'][$addon] : null) :
+                    $options['ad_component_addon_type'];
+                if(is_null($view->vars['ad_component_addon_type_'.$addon])){
+                    throw new LogicException('Falta Parámetro "ad_component_addon_type" para "'.$addon.'" addon');
+                }
+
+                $view->vars['ad_component_addon_content_type_'.$addon] = is_array($options['ad_component_addon_content_type']) ?
+                    (isset($options['ad_component_addon_content_type'][$addon]) ? $options['ad_component_addon_content_type'][$addon] : null) :
+                    $options['ad_component_addon_content_type'];
+                if(is_null($view->vars['ad_component_addon_content_type_'.$addon])){
+                    throw new LogicException('Falta Parámetro "ad_component_addon_content_type" para "'.$addon.'" addon');
+                }
+
+                $view->vars['ad_component_addon_content_'.$addon] = is_array($options['ad_component_addon_content']) ?
+                    (isset($options['ad_component_addon_content'][$addon]) ? $options['ad_component_addon_content'][$addon] : null) :
+                    $options['ad_component_addon_content'];
+                if(is_null($view->vars['ad_component_addon_content_'.$addon])){
+                    throw new LogicException('Falta Parámetro "ad_component_addon_content" para "'.$addon.'" addon');
+                }
+            }
         }
     }
 }
