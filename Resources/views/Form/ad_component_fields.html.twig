@@ -64,8 +64,7 @@
 
 {% block icon_widget %}
     {% set ad_component_addon_type_pre = 'icon' %}
-    {% if value is not empty %}
-        {% set ad_component_addon_content_pre = value | trim %}
-    {% endif %}
+    {% set ad_component_addon_attr_pre= [] %}
+    {% set ad_component_addon_content_pre = value | trim %}
     {{- block('form_widget_simple') -}}
 {% endblock %}
