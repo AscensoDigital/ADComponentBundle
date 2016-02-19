@@ -3,41 +3,41 @@ services:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
-  ad_component.object_hidden.type:
+    ad_component.datetime_hidden.type:
+        class: AscensoDigital\ComponentBundle\Form\Type\DateTimeHiddenType
+        tags:
+            - { name: form.type, alias: datetime_hidden }
+
+    ad_component.object_hidden.type:
         class: AscensoDigital\ComponentBundle\Form\Type\ObjectHiddenType
         arguments: ["@doctrine.orm.entity_manager"]
         tags:
             - { name: form.type, alias: object_hidden }
 
-  ad_component.datetime_hidden.type:
-        class: AscensoDigital\ComponentBundle\Form\Type\DateTimeHiddenType
-        tags:
-            - { name: form.type, alias: datetime_hidden }
-
-  ad_component.object_text.type:
+    ad_component.object_text.type:
         class: AscensoDigital\ComponentBundle\Form\Type\ObjectTextType
         arguments: ["@doctrine.orm.entity_manager"]
         tags:
             - { name: form.type, alias: object_text }
 
-  ad_component.object_text_campo.type:
+    ad_component.object_text_campo.type:
         class: AscensoDigital\ComponentBundle\Form\Type\ObjectTextCampoType
         arguments: ["@doctrine.orm.entity_manager"]
         tags:
             - { name: form.type, alias: object_text_campo }
 
-  ad_component.twig_extension:
+    ad_component.twig_extension:
         class: AscensoDigital\ComponentBundle\Twig\ADExtension
         public: false
         tags:
             - { name: twig.extension }
 
-  ad_component.help_type_extension:
+    ad_component.help_type_extension:
         class: AscensoDigital\ComponentBundle\Form\Extension\HelpTypeExtension
         tags:
             - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
 
-  ad_component.addon_type_extension:
-          class: AscensoDigital\ComponentBundle\Form\Extension\InputAddonTypeExtension
-          tags:
-              - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
+    ad_component.addon_type_extension:
+        class: AscensoDigital\ComponentBundle\Form\Extension\InputAddonTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
