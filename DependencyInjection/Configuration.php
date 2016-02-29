@@ -20,6 +20,7 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('ad_component');
 
         $rootNode
+            ->addDefaultsIfNotSet()
             ->children()
                 ->enumNode('bootstrap_layout')
                     ->cannotBeEmpty()
