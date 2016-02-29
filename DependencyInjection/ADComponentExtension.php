@@ -21,6 +21,16 @@ class ADComponentExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
+        $config = $this->processConfiguration(new Configuration(), $configs);
+        $container->setParameter('ad_component.config', $config);
+
+        if('horizontal' == $config['bootstrap_layout']){
+            $container->setParameter('ad_component.bootstrap_layout', 'bootstrap_3_horizontal_layout.html.twig');
+        }
+        else {
+            $container->setParameter('ad_component.bootstrap_layout', 'bootstrap_3_layout.html.twig');
+        }
+
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
     }

@@ -19,6 +19,15 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('ad_component');
 
+        $rootNode
+            ->children()
+                ->enumNode('bootstrap_layout')
+                    ->cannotBeEmpty()
+                    ->defaultValue('horizontal')
+                    ->values(['horizontal','vertical'])
+                ->end()
+            ->end()
+        ->end();
         return $treeBuilder;
     }
 }
