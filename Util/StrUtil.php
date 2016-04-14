@@ -16,11 +16,19 @@ class StrUtil
         $cadenaDestacada=$cadena;
         if(count($terms)) {
             foreach ($terms as $term) {
-                $cadenaDestacada = str_replace($term, '<strong>' . ucwords($term) . '</strong>', $cadenaDestacada);
+                $cadenaDestacada = str_replace($term, '<strong>' . self::ucwords($term) . '</strong>', $cadenaDestacada);
+                $term_sano=self::sanearString($term);
+                if($term!=$term_sano) {
+                    $cadenaDestacada = str_replace($term_sano, '<strong>' . self::ucwords($term_sano) . '</strong>', $cadenaDestacada);
+                }
             }
         }
         else {
-            $cadenaDestacada = str_replace($destacar, '<strong>' . ucwords($destacar) . '</strong>', $cadenaDestacada);
+            $cadenaDestacada = str_replace($destacar, '<strong>' . self::ucwords($destacar) . '</strong>', $cadenaDestacada);
+            $destacar_sano=self::sanearString($destacar);
+            if($destacar!=$destacar_sano) {
+                $cadenaDestacada = str_replace($destacar_sano, '<strong>' . self::ucwords($destacar_sano) . '</strong>', $cadenaDestacada);
+            }
         }
         return $cadenaDestacada;
     }
@@ -82,5 +90,36 @@ class StrUtil
             $string
         );
         return $string;
+    }
+
+    static function strtolower($str){
+        $str=strtolower($str);
+        return str_replace(
+            array('Ñ','Á','É','Í','Ó','Ú'),
+            array('ñ','á','é','í','ó','ú') ,
+            $str
+        );
+    }
+
+    static function strtoupper($str){
+        $str=strtoupper($str);
+        return str_replace(
+            array('ñ','á','é','í','ó','ú'),
+            array('Ñ','Á','É','Í','Ó','Ú'),
+            $str
+        );
+    }
+
+    static function ucwords($str){
+        $str=ucwords($str);
+        $str_array=explode('',$str);
+        $first=array_shift($str_array);
+        $firstUpper=str_replace(
+            array('ñ','á','é','í','ó','ú'),
+            array('Ñ','Á','É','Í','Ó','Ú'),
+            $first
+        );
+        array_unshift($str_array,$firstUpper);
+        return implode('',$str_array);
     }
 }
