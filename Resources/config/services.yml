@@ -29,7 +29,7 @@ services:
     ad_component.twig_extension:
         class: AscensoDigital\ComponentBundle\Twig\ADExtension
         public: false
-        arguments: [ %ad_component.bootstrap_layout% ]
+        arguments: [ "%ad_component.bootstrap_layout%" ]
         tags:
             - { name: twig.extension }
 
