@@ -1,5 +1,12 @@
 {% extends ad_component_get_layout() %}
 
+{% block form_label -%}
+    {{- parent() -}}
+    {% if required %}
+        <span class="label-required">*</span>
+    {% endif %}
+{%- endblock form_label %}
+
 {% block form_widget -%}
     {% spaceless %}
         {{- parent() -}}
