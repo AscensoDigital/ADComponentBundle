@@ -33,6 +33,11 @@ class StrUtil
         return $cadenaDestacada;
     }
 
+    static public function firstWord($str) {
+        $tmp=explode(' ',$str);
+        return isset($tmp[0]) ? $tmp[0] : $str;
+    }
+    
     static public function formatReport($contenido) {
         return str_replace('&quot;','"',utf8_decode(str_replace('À',';',$contenido)));
     }
