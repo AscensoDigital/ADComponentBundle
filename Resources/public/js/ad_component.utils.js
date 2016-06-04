@@ -16,7 +16,7 @@ var ADComponent = {
         for (var prop in obj) {
             console.log(prop+' '+obj[prop]);
             if(typeof(obj[prop])=='object'){
-                ret[prop]=objectToArray(obj[prop]);
+                ret[prop]=this.object2Array(obj[prop]);
             }
             else {
                 ret[prop]=obj[prop];
