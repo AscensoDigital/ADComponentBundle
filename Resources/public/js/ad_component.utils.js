@@ -14,14 +14,12 @@ var ADComponent = {
     object2Array: function (obj) {
         var ret= {};
         for (var prop in obj) {
-            console.log(prop+' '+obj[prop]);
             if(typeof(obj[prop])=='object'){
                 ret[prop]=this.object2Array(obj[prop]);
             }
             else {
                 ret[prop]=obj[prop];
             }
-            console.log(ret);
         }
         return ret;
     }
