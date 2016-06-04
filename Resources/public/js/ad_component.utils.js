@@ -7,7 +7,7 @@ var ADComponent = {
     },
 
     msgLabel: function (label, level, msg) {
-        var label = "label label-" + level;
-        return "<span class='" + label + "'>" + label + "</span><br><div>" + msg + "</div>";
+        var clase = "label label-" + level;
+        return '<span class="' + clase + '">' + label + '</span><br><div>' + msg + '</div>';
     },
 };
