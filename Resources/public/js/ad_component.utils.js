@@ -10,4 +10,19 @@ var ADComponent = {
         var clase = "label label-" + level;
         return '<span class="' + clase + '">' + label + '</span><br><div>' + msg + '</div>';
     },
+
+    object2Array: function (obj) {
+        var ret= {};
+        for (var prop in obj) {
+            console.log(prop+' '+obj[prop]);
+            if(typeof(obj[prop])=='object'){
+                ret[prop]=objectToArray(obj[prop]);
+            }
+            else {
+                ret[prop]=obj[prop];
+            }
+            console.log(ret);
+        }
+        return ret;
+    }
 };
