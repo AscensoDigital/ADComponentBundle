@@ -46,7 +46,7 @@ class StrUtil
      * Reemplaza todos los acentos por sus equivalentes sin ellos
      * @param $string
      *  string la cadena a sanear
-     * @return $string
+     * @return mixed|$string
      *  string saneada
      */
     static public function sanearString($string) {
@@ -117,7 +117,7 @@ class StrUtil
 
     static function ucwords($str){
         $str=ucwords($str);
-        $str_array=explode('',$str);
+        $str_array=str_split('',$str);
         $first=array_shift($str_array);
         $firstUpper=str_replace(
             array('ñ','á','é','í','ó','ú'),
