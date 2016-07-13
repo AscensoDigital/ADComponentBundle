@@ -117,7 +117,7 @@ class StrUtil
 
     static function ucwords($str){
         $str=ucwords($str);
-        $str_array=str_split('',$str);
+        $str_array=str_split($str);
         $first=array_shift($str_array);
         $firstUpper=str_replace(
             array('ñ','á','é','í','ó','ú'),
