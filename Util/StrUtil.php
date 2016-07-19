@@ -117,14 +117,18 @@ class StrUtil
 
     static function ucwords($str){
         $str=ucwords($str);
-        $str_array=str_split($str);
-        $first=array_shift($str_array);
-        $firstUpper=str_replace(
-            array('ñ','á','é','í','ó','ú'),
-            array('Ñ','Á','É','Í','Ó','Ú'),
-            $first
-        );
-        array_unshift($str_array,$firstUpper);
-        return implode('',$str_array);
+        $words_array=explode(" ",$str);
+        $ret=array();
+        foreach ($words_array as $word) {
+            $first=$word[0];
+            $firstUpper=str_replace(
+                array('ñ','á','é','í','ó','ú'),
+                array('Ñ','Á','É','Í','Ó','Ú'),
+                $first
+            );
+            $word[0]=$firstUpper;
+            $ret[]=$word;
+        }
+        return trim(implode(' ',$ret));
     }
 }
