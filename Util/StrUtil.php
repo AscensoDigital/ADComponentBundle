@@ -49,7 +49,7 @@ class StrUtil
      * @return mixed|$string
      *  string saneada
      */
-    static public function sanearString($string) {
+    static public function sanearString($string, $exclude_guion = true) {
         $string = trim($string);
         $string = str_replace(
             array('á', 'à', 'ä', 'â', 'ª', 'Á', 'À', 'Â', 'Ä'),
@@ -83,7 +83,7 @@ class StrUtil
         );
         //Esta parte se encarga de eliminar cualquier caracter extraño
         $string = str_replace(
-            array("\\", "¨", "º", "-", "~",
+            array("\\", "¨", "º", "~",
                 "#", "@", "|", "!", "\"",
                 "·", "$", "%", "&", "/",
                 "(", ")", "?", "'", "¡",
@@ -94,6 +94,11 @@ class StrUtil
             '',
             $string
         );
+
+        if($exclude_guion) {
+            $string = str_replace("-", '', $string);
+        }
+
         return $string;
     }
 
