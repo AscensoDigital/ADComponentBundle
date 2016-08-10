@@ -30,6 +30,7 @@ class ADExtension extends \Twig_Extension {
             new \Twig_SimpleFilter('utf8_decode', 'utf8_decode'),
             new \Twig_SimpleFilter('utf8_encode', 'utf8_encode'),
             new \Twig_SimpleFilter('nl2br','nl2br'),
+            new \Twig_SimpleFilter('is_numeric','is_numeric'),
         );
     }
 
