@@ -11,7 +11,7 @@ namespace AscensoDigital\ComponentBundle\Util;
 
 class StrUtil
 {
-    static public function destacarTerm($destacar,$cadena){
+    public static function destacarTerm($destacar,$cadena){
         $terms=explode(" ",$destacar);
         $cadenaDestacada=$cadena;
         if(count($terms)) {
@@ -33,12 +33,12 @@ class StrUtil
         return $cadenaDestacada;
     }
 
-    static public function firstWord($str) {
+    public static function firstWord($str) {
         $tmp=explode(' ',$str);
         return isset($tmp[0]) ? $tmp[0] : $str;
     }
-    
-    static public function formatReport($contenido) {
+
+    public static function formatReport($contenido) {
         return str_replace('&quot;','"',utf8_decode(str_replace('À',';',$contenido)));
     }
 
@@ -49,7 +49,7 @@ class StrUtil
      * @return mixed|$string
      *  string saneada
      */
-    static public function sanearString($string, $exclude_guion = true) {
+    public static function sanearString($string, $exclude_guion = true) {
         $string = trim($string);
         $string = str_replace(
             array('á', 'à', 'ä', 'â', 'ª', 'Á', 'À', 'Â', 'Ä'),
@@ -102,7 +102,7 @@ class StrUtil
         return $string;
     }
 
-    static function strtolower($str){
+    public static function strtolower($str){
         $str=strtolower($str);
         return str_replace(
             array('Ñ','Á','É','Í','Ó','Ú'),
@@ -111,7 +111,7 @@ class StrUtil
         );
     }
 
-    static function strtoupper($str){
+    public static function strtoupper($str){
         $str=strtoupper($str);
         return str_replace(
             array('ñ','á','é','í','ó','ú'),
@@ -120,7 +120,7 @@ class StrUtil
         );
     }
 
-    static function ucwords($str){
+    public static function ucwords($str){
         $str=ucwords($str);
         $words_array=explode(" ",$str);
         $ret=array();
