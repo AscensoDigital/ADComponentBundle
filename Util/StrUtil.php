@@ -96,7 +96,7 @@ class StrUtil
         );
 
         if($exclude_guion) {
-            $string = str_replace("-", '', $string);
+            $string = str_replace(array("-","_"), '', $string);
         }
 
         return $string;
