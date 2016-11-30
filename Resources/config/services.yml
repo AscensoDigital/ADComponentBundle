@@ -3,6 +3,12 @@ services:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
+    ad_component.modificador.subscriber:
+        class: AscensoDigital\ComponentBundle\EventListener\RegisterModificadorSubscriber
+        arguments: ["@security.token_storage"]
+        tags:
+            - { name: doctrine.event_subscriber }
+
     ad_component.datetime_hidden.type:
         class: AscensoDigital\ComponentBundle\Form\Type\DateTimeHiddenType
         tags:
