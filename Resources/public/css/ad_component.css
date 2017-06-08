@@ -1,5 +1,6 @@
-#ad_component-rating-label {
+.ad_component-rating-label {
     margin-left: 10px;
+    font-size: large;
 }
 
 .ad_component-rating i {
