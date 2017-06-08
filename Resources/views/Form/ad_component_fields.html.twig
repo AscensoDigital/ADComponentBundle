@@ -72,9 +72,9 @@
 {% block rating_widget %}
     <span class="ad_component-rating">
         {% for i in rating_values  %}
-            <i class="fa fa-2x fa-star{% if i > value %}-o{% endif %}" data-rating="{{ i }}" data-rating-label="{{ rating_labels[i] is defined ? rating_labels[i] : i }}"></i>
+            <i class="fa fa-2x {{ i > value ? rating_icon_base : rating_icon_check }}" data-rating="{{ i }}" data-rating-label="{{ rating_labels[i] is defined ? rating_labels[i] : i }}"></i>
         {% endfor %}
-        <span class="ad_component-rating-label">{{ rating_labels[value] is defined ? rating_labels[value] : (value >= rating_min ? value : '') }}</span>
+        <span class="ad_component-rating-label">{{ rating_labels[value] is defined ? rating_labels[value] : (value >= rating_min ? value : rating_label_empty ) }}</span>
         {{- block('hidden_widget') -}}
     </span>
 {% endblock %}

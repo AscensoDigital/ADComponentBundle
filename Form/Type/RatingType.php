@@ -20,12 +20,16 @@ class RatingType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefined([
-            'rating_max', 'rating_min', 'rating_step', 'rating_labels'
+            'rating_max', 'rating_min', 'rating_step', 'rating_labels', 'rating_label_empty',
+            'rating_icon_base', 'rating_icon_check'
         ])
         ->setDefaults([
+            'rating_icon_base' => 'fa-star-o',
+            'rating_icon_check' => 'fa-star',
             'rating_max' => 5,
             'rating_min' => 1,
             'rating_step' => 1,
+            'rating_label_empty' => '(Haz click para puntuar)',
             'rating_labels' => [1 => 'Pésimo', 2 => 'Malo', 3 => 'Normal', 4 => 'Muy Bueno', 5 => 'Excelente']
         ]);
     }
@@ -43,5 +47,9 @@ class RatingType extends AbstractType
         }
         $view->vars['rating_min']=$options['rating_min'];
         $view->vars['rating_labels']=$options['rating_labels'];
+        $view->vars['rating_label_empty']=$options['rating_label_empty'];
+
+        $view->vars['rating_icon_base']=$options['rating_icon_base'];
+        $view->vars['rating_icon_check']=$options['rating_icon_check'];
     }
 }
