@@ -20,10 +20,13 @@ class RatingType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefined([
-            'max_rating'
+            'rating_max', 'rating_min', 'rating_step', 'rating_labels'
         ])
         ->setDefaults([
-            'max_rating' => 5
+            'rating_max' => 5,
+            'rating_min' => 1,
+            'rating_step' => 1,
+            'rating_labels' => [1 => 'Pésimo', 2 => 'Malo', 3 => 'Normal', 4 => 'Muy Bueno', 5 => 'Excelente']
         ]);
     }
 
@@ -33,6 +36,12 @@ class RatingType extends AbstractType
     }
 
     public function buildView(FormView $view, FormInterface $form, array $options) {
-        $view->vars['max_rating']=$options['max_rating'];
+
+        $view->vars['rating_values']=[];
+        for($i=$options['rating_min'];$i<=$options['rating_max'];$i+=$options['rating_step']){
+            $view->vars['rating_values'][]=$i;
+        }
+        $view->vars['rating_min']=$options['rating_min'];
+        $view->vars['rating_labels']=$options['rating_labels'];
     }
 }
