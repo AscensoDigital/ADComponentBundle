@@ -68,3 +68,12 @@
     {% set ad_component_addon_content_pre = value | trim %}
     {{- block('form_widget_simple') -}}
 {% endblock %}
+
+{% block rating_widget %}
+    <span class="ad_component-rating">
+        {% for i in 1 .. max_rating  %}
+            <i class="fa fa-star{% if i > value %}-o{% endif %}" data-rating="{{ i }}"></i>
+        {% endfor %}
+        {{- block('hidden_widget') -}}
+    </span>
+{% endblock %}
