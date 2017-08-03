@@ -50,7 +50,7 @@ $(document).ready(function(){
         var iconBase = $(this).parent('span').data('icon-base');
         var iconCheck = $(this).parent('span').data('icon-check');
 
-        if(valor === 'Nan'){
+        if(valor === NaN){
             $(ratingLabel).html('');
         }
         $(this).parent("span").children("i").each(function(){
