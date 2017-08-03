@@ -70,7 +70,7 @@
 {% endblock %}
 
 {% block rating_widget %}
-    <span class="ad_component-rating">
+    <span class="ad_component-rating" data-icon-base="{{ rating_icon_base }}" data-icon-check="{{ rating_icon_check }}">
         {% for i in rating_values  %}
             <i class="fa fa-2x {{ i > value ? rating_icon_base : rating_icon_check }}" data-rating="{{ i }}" data-rating-label="{{ rating_labels[i] is defined ? rating_labels[i] : i }}"></i>
         {% endfor %}
