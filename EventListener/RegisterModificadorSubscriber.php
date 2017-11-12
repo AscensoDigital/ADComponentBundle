@@ -47,7 +47,7 @@ class RegisterModificadorSubscriber implements EventSubscriber {
             call_user_func(array($entity, 'setModificador'), is_object($usuario) ? $usuario : null);
         }
         if(method_exists($entity, 'setModificadorId')){
-            call_user_func(array($entity, 'setModificadorId'), is_null($usuario) ? null : $usuario->getId());
+            call_user_func(array($entity, 'setModificadorId'), is_null($usuario) || !method_exists($usuario, 'getId') ? null : $usuario->getId());
         }
         if(method_exists($entity, 'setUpdatedAt')) {
             call_user_func(array($entity, 'setUpdatedAt'), new \DateTime());
