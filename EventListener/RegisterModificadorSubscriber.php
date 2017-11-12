@@ -42,7 +42,7 @@ class RegisterModificadorSubscriber implements EventSubscriber {
     public function index(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
-        $usuario= is_null($this->tokenStorage->getToken()) ? null : $this->tokenStorage->getToken()->getUser();
+        $usuario= is_null($this->tokenStorage->getToken()) || is_string($this->tokenStorage->getToken()) ? null : $this->tokenStorage->getToken()->getUser();
         if(method_exists($entity, 'setModificador')) {
             call_user_func(array($entity, 'setModificador'), is_object($usuario) ? $usuario : null);
         }
