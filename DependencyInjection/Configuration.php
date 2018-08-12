@@ -27,6 +27,11 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue('horizontal')
                     ->values(['horizontal','vertical'])
                 ->end()
+                ->enumNode('bootstrap_version')
+                    ->canotBeEmpty()
+                    ->defaultValue('3')
+                    ->values(['3','4'])
+                ->end()
             ->end()
         ->end();
         return $treeBuilder;

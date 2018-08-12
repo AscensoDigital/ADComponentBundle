@@ -23,12 +23,13 @@ class ADComponentExtension extends Extension
     {
         $config = $this->processConfiguration(new Configuration(), $configs);
         $container->setParameter('ad_component.config', $config);
-
+        
+        $btv=$config['bootstrap_vesrion'];
         if('horizontal' == $config['bootstrap_layout']){
-            $container->setParameter('ad_component.bootstrap_layout', 'bootstrap_3_horizontal_layout.html.twig');
+            $container->setParameter('ad_component.bootstrap_layout', 'bootstrap_'.$btv.'_horizontal_layout.html.twig');
         }
         else {
-            $container->setParameter('ad_component.bootstrap_layout', 'bootstrap_3_layout.html.twig');
+            $container->setParameter('ad_component.bootstrap_layout', 'bootstrap_'.$btv.'_layout.html.twig');
         }
 
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
