@@ -28,7 +28,7 @@ class Configuration implements ConfigurationInterface
                     ->values(['horizontal','vertical'])
                 ->end()
                 ->enumNode('bootstrap_version')
-                    ->canotBeEmpty()
+                    ->cannotBeEmpty()
                     ->defaultValue('3')
                     ->values(['3','4'])
                 ->end()
