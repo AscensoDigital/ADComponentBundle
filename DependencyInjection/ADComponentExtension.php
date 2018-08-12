@@ -24,7 +24,7 @@ class ADComponentExtension extends Extension
         $config = $this->processConfiguration(new Configuration(), $configs);
         $container->setParameter('ad_component.config', $config);
         
-        $btv=$config['bootstrap_vesrion'];
+        $btv=$config['bootstrap_version'];
         if('horizontal' == $config['bootstrap_layout']){
             $container->setParameter('ad_component.bootstrap_layout', 'bootstrap_'.$btv.'_horizontal_layout.html.twig');
         }
