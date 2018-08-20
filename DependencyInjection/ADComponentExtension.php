@@ -25,6 +25,7 @@ class ADComponentExtension extends Extension
         $container->setParameter('ad_component.config', $config);
         
         $btv=$config['bootstrap_version'];
+        $container->setParameter('ad_component.bootstrap_version',$btv);
         if('horizontal' == $config['bootstrap_layout']){
             $container->setParameter('ad_component.bootstrap_layout', 'bootstrap_'.$btv.'_horizontal_layout.html.twig');
         }

@@ -12,15 +12,18 @@ namespace AscensoDigital\ComponentBundle\Twig;
 class ADExtension extends \Twig_Extension {
 
     private $layout;
+    private $version;
 
-    public function __construct($layout) {
+    public function __construct($layout,$version) {
         $this->layout=$layout;
+        $this->version=$version;
     }
 
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('ad_component_get_layout',array($this,'getLayout'))
+            new \Twig_SimpleFunction('ad_component_get_layout',array($this,'getLayout')),
+            new \Twig_SimpleFunction('ad_component_get_bootstrap_version',array($this,'getVersion'))
         );
     }
 
@@ -50,7 +53,11 @@ class ADExtension extends \Twig_Extension {
     public function getLayout() {
         return $this->layout;
     }
-    
+
+    public function getVersion() {
+        return $this->version;
+    }
+
     public function getName() {
         return 'ad_extension';
     }

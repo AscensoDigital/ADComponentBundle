@@ -35,7 +35,7 @@ services:
     ad_component.twig_extension:
         class: AscensoDigital\ComponentBundle\Twig\ADExtension
         public: false
-        arguments: [ "%ad_component.bootstrap_layout%" ]
+        arguments: [ "%ad_component.bootstrap_layout%", "%ad_component.bootstrap_version%" ]
         tags:
             - { name: twig.extension }
 
