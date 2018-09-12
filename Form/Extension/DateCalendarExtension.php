@@ -2,11 +2,13 @@
 
 namespace AscensoDigital\ComponentBundle\Form\Extension;
 
-use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class DateCalendarExtension extends AbstractType
+class DateCalendarExtension extends AbstractTypeExtension
 {
     public function getExtendedType() {
         return DateType::class;
@@ -14,7 +16,21 @@ class DateCalendarExtension extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->addAllowedValues('widget','calendar');
+        $resolver->setDefined('ad_component_widget');
+        $resolver->addAllowedValues('ad_component_widget','calendar');
+    }
+
+    /**
+     * Pass the help to the view
+     *
+     * @param FormView $view
+     * @param FormInterface $form
+     * @param array $options
+     */
+    public function buildView(FormView $view, FormInterface $form, array $options) {
+        if (array_key_exists('ad_component_widget', $options)) {
+            $view->vars['ad_component_widget'] = $options['ad_component_widget'];
+        }
     }
 
     public function getBlockPrefix()

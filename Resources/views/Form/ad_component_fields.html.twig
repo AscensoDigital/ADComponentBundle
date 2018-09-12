@@ -80,9 +80,10 @@
 {% endblock %}
 
 {% block date_widget -%}
-    {%- if widget == 'calendar' -%}
+    {%- if ad_component_widget == 'calendar' -%}
         {%- set type = 'hidden' -%}
         {%- set month = (value is not empty ? value : "now" ) | date("U") -%}
+        {%- set currentDay = (value is not empty ? value : "now" ) -%}
         {{- block('form_widget_simple') -}}
         <div class="calendar">
             <div class="calendar__header">
@@ -90,13 +91,13 @@
                     {{ month|date('F Y') }}
                 </div>
                 <div class="calendar__row">
-                    <div class="calendar__day calendar__heading">S<span class="calendar__heading--abbr">un</span><span class="calendar__heading--full">day</span></div>
-                    <div class="calendar__day calendar__heading">M<span class="calendar__heading--abbr">on</span><span class="calendar__heading--full">day</span></div>
-                    <div class="calendar__day calendar__heading">T<span class="calendar__heading--abbr">ue</span><span class="calendar__heading--full">sday</span></div>
-                    <div class="calendar__day calendar__heading">W<span class="calendar__heading--abbr">ed</span><span class="calendar__heading--full">nesday</span></div>
-                    <div class="calendar__day calendar__heading">T<span class="calendar__heading--abbr">hu</span><span class="calendar__heading--full">rsday</span></div>
-                    <div class="calendar__day calendar__heading">F<span class="calendar__heading--abbr">ri</span><span class="calendar__heading--full">day</span></div>
-                    <div class="calendar__day calendar__heading">S<span class="calendar__heading--abbr">at</span><span class="calendar__heading--full">urday</span></div>
+                    <div class="calendar__day calendar__heading">D<span class="calendar__heading--abbr">om</span><span class="calendar__heading--full">ingo</span></div>
+                    <div class="calendar__day calendar__heading">L<span class="calendar__heading--abbr">un</span><span class="calendar__heading--full">es</span></div>
+                    <div class="calendar__day calendar__heading">M<span class="calendar__heading--abbr">ar</span><span class="calendar__heading--full">tes</span></div>
+                    <div class="calendar__day calendar__heading">M<span class="calendar__heading--abbr">ie</span><span class="calendar__heading--full">rcoles</span></div>
+                    <div class="calendar__day calendar__heading">J<span class="calendar__heading--abbr">ue</span><span class="calendar__heading--full">ves</span></div>
+                    <div class="calendar__day calendar__heading">v<span class="calendar__heading--abbr">ie</span><span class="calendar__heading--full">rnes</span></div>
+                    <div class="calendar__day calendar__heading">S<span class="calendar__heading--abbr">ab</span><span class="calendar__heading--full">ado</span></div>
                 </div>
             </div>
             <div class="calendar__body">
