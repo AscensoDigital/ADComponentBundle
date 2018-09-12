@@ -3,6 +3,7 @@
 namespace AscensoDigital\ComponentBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use AscensoDigital\ComponentBundle\Form\DataTransformer\ObjectToIdTransformer;
@@ -36,7 +37,7 @@ class ObjectHiddenType extends AbstractType {
 
     public function getParent()
     {
-        return 'hidden';
+        return HiddenType::class;
     }
 
     public function getName()

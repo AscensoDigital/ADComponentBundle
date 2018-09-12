@@ -3,6 +3,7 @@
 namespace AscensoDigital\ComponentBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use AscensoDigital\ComponentBundle\Form\DataTransformer\ObjectToCampoTransformer;
@@ -36,7 +37,7 @@ class ObjectTextCampoType extends AbstractType {
 
     public function getParent()
     {
-        return 'text';
+        return TextType::class;
     }
 
     public function getName()
