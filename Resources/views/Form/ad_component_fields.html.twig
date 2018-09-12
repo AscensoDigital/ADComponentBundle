@@ -87,14 +87,15 @@
         {{- block('form_widget_simple') -}}
         <script>
             document.addEventListener("DOMContentLoaded", (event) => {
-                const dp=document.getElementById('{{ id }}_datepicker');
+                const dp=$('#{{ id }}_datepicker');
                 dp.datepicker({
                     language: 'es',
                     daysOfWeekDisabled: [0]
                 });
-                dp.addEventListener('changeDate', function() {
-                    let inp=document.getElementById('{{ id }}')
-                    inp.value=dp.datepicker('getFormattedDate');
+                dp.on('changeDate', function() {
+                    let inp=$('#{{ id }}');
+                    inp.val(dp.datepicker('getFormattedDate'));
+                    console.log(inp.value);
                 });
             });
         </script>
