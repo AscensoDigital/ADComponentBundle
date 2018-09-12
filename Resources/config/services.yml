@@ -48,3 +48,8 @@ services:
         class: AscensoDigital\ComponentBundle\Form\Extension\InputAddonTypeExtension
         tags:
             - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
+
+    ad_component.date_calendar_type_extension:
+            class: AscensoDigital\ComponentBundle\Form\Extension\DateCalendarExtension
+            tags:
+                - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\DateType }

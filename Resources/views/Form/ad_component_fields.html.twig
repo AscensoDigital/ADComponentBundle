@@ -78,3 +78,57 @@
         {{- block('hidden_widget') -}}
     </span>
 {% endblock %}
+
+{% block date_widget -%}
+    {%- if widget == 'calendar' -%}
+        {%- set type = 'hidden' -%}
+        {%- set month = (value is not empty ? value : "now" ) | date("U") -%}
+        {{- block('form_widget_simple') -}}
+        <div class="calendar">
+            <div class="calendar__header">
+                <div class="calendar__title">
+                    {{ month|date('F Y') }}
+                </div>
+                <div class="calendar__row">
+                    <div class="calendar__day calendar__heading">S<span class="calendar__heading--abbr">un</span><span class="calendar__heading--full">day</span></div>
+                    <div class="calendar__day calendar__heading">M<span class="calendar__heading--abbr">on</span><span class="calendar__heading--full">day</span></div>
+                    <div class="calendar__day calendar__heading">T<span class="calendar__heading--abbr">ue</span><span class="calendar__heading--full">sday</span></div>
+                    <div class="calendar__day calendar__heading">W<span class="calendar__heading--abbr">ed</span><span class="calendar__heading--full">nesday</span></div>
+                    <div class="calendar__day calendar__heading">T<span class="calendar__heading--abbr">hu</span><span class="calendar__heading--full">rsday</span></div>
+                    <div class="calendar__day calendar__heading">F<span class="calendar__heading--abbr">ri</span><span class="calendar__heading--full">day</span></div>
+                    <div class="calendar__day calendar__heading">S<span class="calendar__heading--abbr">at</span><span class="calendar__heading--full">urday</span></div>
+                </div>
+            </div>
+            <div class="calendar__body">
+                <div class="calendar__row">
+                    {% set daysInMonth = month|date('t') %}
+                    {% set startDow = month|date('F 1\\s\\t Y')|date('w') %}
+                    {% set dow = startDow %}
+                    {% for day in range(1,daysInMonth) %}
+                    {% if loop.first and startDow != 0 %}
+                        <div class="calendar__span calendar__begin calendar__span--spans-{{ startDow }}"></div>
+                    {% endif %}
+                    <div class="calendar__day {% if (currentDay | date('j')) == day %}calendar__day--current{% endif %}">
+                        <div class="calendar__number">{{ day }}</div>
+                        <div class="calendar__day-content">
+                            {{ calendarContent[day] }}
+                        </div>
+                    </div>
+                    {% if loop.last and dow != 6 %}
+                        <div class="calendar__span calendar__span--spans-{{ 6 - dow }}">&nbsp;</div>
+                    {% endif %}
+                    {% if dow == 6 %}
+                    {% set dow = 0 %}
+                </div>
+                <div class="calendar__row">
+                    {% else %}
+                        {% set dow = dow + 1 %}
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {%- else -%}
+    {{- parent() -}}
+    {%- endif -%}
+{% endblock date_widget %}
