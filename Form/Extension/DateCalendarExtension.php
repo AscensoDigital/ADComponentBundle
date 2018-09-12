@@ -18,7 +18,8 @@ class DateCalendarExtension extends AbstractTypeExtension
     {
         $resolver->setDefined('ad_component_widget')
             ->setDefault('widget','single_text')
-            ->addAllowedValues('ad_component_widget','calendar');
+            ->setDefault('ad_component_widget','')
+            ->addAllowedValues('ad_component_widget',['','calendar']);
     }
 
     /**
