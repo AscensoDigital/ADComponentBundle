@@ -86,14 +86,16 @@
         {%- set type = 'hidden' -%}
         {{- block('form_widget_simple') -}}
         <script>
-            const dp=document.getElementById('{{ id }}_datepicker');
-            dp.datepicker({
-                language: 'es',
-                daysOfWeekDisabled: [0]
-            });
-            dp.addEventListener('changeDate', function() {
-                let inp=document.getElementById('{{ id }}')
-                inp.value=dp.datepicker('getFormattedDate');
+            document.addEventListener("DOMContentLoaded", (event) => {
+                const dp=document.getElementById('{{ id }}_datepicker');
+                dp.datepicker({
+                    language: 'es',
+                    daysOfWeekDisabled: [0]
+                });
+                dp.addEventListener('changeDate', function() {
+                    let inp=document.getElementById('{{ id }}')
+                    inp.value=dp.datepicker('getFormattedDate');
+                });
             });
         </script>
     {%- else -%}
