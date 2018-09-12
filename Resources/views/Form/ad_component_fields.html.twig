@@ -81,8 +81,8 @@
 
 {% block date_widget -%}
     {%- if ad_component_widget == 'calendar' -%}
-        {%- set fecha = value is not empty ? value : "now" -%}
-        <div id="{{ id }}_datepicker" data-date="{{ fecha | date('Y-m-d') }}"></div>
+        {%- set value = (value is not empty ? value : "now") | date('Y-m-d') -%}
+        <div id="{{ id }}_datepicker" data-date="{{ value }}"></div>
         {{- block('form_widget_simple') -}}
         <script>
             document.addEventListener("DOMContentLoaded", (event) => {
@@ -91,16 +91,9 @@
                     language: 'es',
                     daysOfWeekDisabled: [0]
                 });
-                dp.on('show', function(){
-                    let inp=$('#{{ id }}');
-                    inp.val(dp.datepicker('getFormattedDate'));
-                    console.log('show',inp.val());
-
-                });
                 dp.on('changeDate', function() {
                     let inp=$('#{{ id }}');
                     inp.val(dp.datepicker('getFormattedDate'));
-                    console.log('change',inp.val());
                 });
             });
         </script>
