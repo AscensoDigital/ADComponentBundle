@@ -34,6 +34,8 @@ class ADExtension extends \Twig_Extension {
             new \Twig_SimpleFilter('utf8_encode', 'utf8_encode'),
             new \Twig_SimpleFilter('nl2br','nl2br'),
             new \Twig_SimpleFilter('is_numeric','is_numeric'),
+            new \Twig_SimpleFilter('ucfirst','ucfirst'),
+            new \Twig_SimpleFilter('ucwords','ucwords'),
         );
     }
 
