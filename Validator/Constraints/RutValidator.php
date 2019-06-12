@@ -28,7 +28,7 @@ class RutValidator extends ConstraintValidator
             throw new UnexpectedTypeException($constraint, Rut::class);
         }
 
-        if (null === $value || '' === $value) {
+        if (null === $value || '' === $value || '-' === $value) {
             return;
         }
 
