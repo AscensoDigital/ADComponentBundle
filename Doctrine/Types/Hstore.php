@@ -18,7 +18,10 @@ class Hstore extends Type {
         if (empty($value)) {
             return array();
         }
-        $attributes = json_decode('{' . str_replace('"=>"', '":"', $value) . '}', true);
+        $json='{' . str_replace("=>", ':', $value) . '}';
+        $json=str_replace('NULL','"NULL"',$json);
+
+        $attributes = json_decode($json, true);
         $array      = array();
         foreach ($attributes as $k => $v) {
             if (is_numeric($v)) {
