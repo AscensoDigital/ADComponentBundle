@@ -53,3 +53,6 @@ services:
             class: AscensoDigital\ComponentBundle\Form\Extension\DateCalendarExtension
             tags:
                 - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\DateType }
+
+    ad_compoment.security_encoder:
+            class: AscensoDigital\ComponentBundle\Security\Encoder\Sha1LegacyPasswordEncoder
