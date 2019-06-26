@@ -11,6 +11,10 @@ namespace AscensoDigital\ComponentBundle\Util;
 
 class StrUtil
 {
+    public static function bool2Str($bool) {
+        return $bool ? 'Sí' : 'No';
+    }
+
     public static function destacarTerm($destacar,$cadena){
         $terms=explode(" ",$destacar);
         $cadenaDestacada=$cadena;
