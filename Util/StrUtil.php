@@ -11,7 +11,7 @@ namespace AscensoDigital\ComponentBundle\Util;
 
 class StrUtil
 {
-    public static function bool2Str($bool) {
+    public static function bool2str($bool) {
         return $bool ? 'Sí' : 'No';
     }
 

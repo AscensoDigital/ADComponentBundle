@@ -9,6 +9,10 @@
 namespace AscensoDigital\ComponentBundle\Twig;
 
 
+use AscensoDigital\ComponentBundle\Util\StrUtil;
+use Twig\TwigFilter;
+use Twig\TwigFunction;
+
 class ADExtension extends \Twig_Extension {
 
     private $layout;
@@ -22,20 +26,22 @@ class ADExtension extends \Twig_Extension {
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('ad_component_get_layout',array($this,'getLayout')),
-            new \Twig_SimpleFunction('ad_component_get_bootstrap_version',array($this,'getVersion'))
+            new TwigFunction('ad_component_get_layout',array($this,'getLayout')),
+            new TwigFunction('ad_component_get_bootstrap_version',array($this,'getVersion')),
+
         );
     }
 
     public function getFilters()
     {
         return array(
-            new \Twig_SimpleFilter('utf8_decode', 'utf8_decode'),
-            new \Twig_SimpleFilter('utf8_encode', 'utf8_encode'),
-            new \Twig_SimpleFilter('nl2br','nl2br'),
-            new \Twig_SimpleFilter('is_numeric','is_numeric'),
-            new \Twig_SimpleFilter('ucfirst','ucfirst'),
-            new \Twig_SimpleFilter('ucwords','ucwords'),
+            new TwigFilter('utf8_decode', 'utf8_decode'),
+            new TwigFilter('utf8_encode', 'utf8_encode'),
+            new TwigFilter('nl2br','nl2br'),
+            new TwigFilter('is_numeric','is_numeric'),
+            new TwigFilter('ucfirst','ucfirst'),
+            new TwigFilter('ucwords','ucwords'),
+            new TwigFilter('bool2str',[$this,'bool2str']),
         );
     }
 
@@ -58,6 +64,10 @@ class ADExtension extends \Twig_Extension {
 
     public function getVersion() {
         return $this->version;
+    }
+
+    public function bool2str($bool) {
+        return StrUtil::bool2str($bool);
     }
 
     public function getName() {
