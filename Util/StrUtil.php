@@ -124,8 +124,8 @@ class StrUtil
         );
     }
 
-    public static function ucwords($str){
-        $str=ucwords($str);
+    public static function ucwords($str, $force = false){
+        $str= $force ? ucwords(self::strtolower($str)) : ucwords($str);
         $words_array=explode(" ",$str);
         $ret=array();
         foreach ($words_array as $word) {
