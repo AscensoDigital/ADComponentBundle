@@ -53,7 +53,7 @@ class ObjectToIdTransformer implements DataTransformerInterface
             return "";
         }
 
-        return $object->getId();
+        return is_object($object->getId()) ? $object->getId()->getId() : $object->getId();
     }
 
     /**
