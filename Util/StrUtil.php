@@ -125,6 +125,11 @@ class StrUtil
     }
 
     public static function ucwords($str, $force = false){
+
+        if(0==strlen($str)) {
+            return '';
+        }
+
         $str= $force ? ucwords(self::strtolower($str)) : ucwords($str);
         $words_array=explode(" ",$str);
         $ret=array();
