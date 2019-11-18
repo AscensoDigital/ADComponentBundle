@@ -30,9 +30,10 @@ class ObjectToCampoTransformer implements DataTransformerInterface
     private $campo;
 
     /**
-     * 
-     * @param \Doctrine\Common\Persistence\ObjectManager $om
-     * @param string $objectClass
+     * ObjectToCampoTransformer constructor.
+     * @param ObjectManager $om
+     * @param $objectClass
+     * @param $campo
      */
     public function __construct(ObjectManager $om, $objectClass, $campo)
     {
@@ -59,7 +60,7 @@ class ObjectToCampoTransformer implements DataTransformerInterface
     /**
      * Transforms a string (campo) to an object.
      *
-     * @param  string $id
+     * @param  string $valor
      *
      * @return Object|null
      *
