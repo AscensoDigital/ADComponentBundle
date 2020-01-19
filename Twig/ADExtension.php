@@ -10,10 +10,11 @@ namespace AscensoDigital\ComponentBundle\Twig;
 
 
 use AscensoDigital\ComponentBundle\Util\StrUtil;
+use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 
-class ADExtension extends \Twig_Extension {
+class ADExtension extends AbstractExtension {
 
     private $layout;
     private $version;
@@ -47,15 +48,15 @@ class ADExtension extends \Twig_Extension {
 
     public function getOperators()
     {
-        return array(
-            array(
-                '!' => array('precedence' => 50, 'class' => 'Twig_Node_Expression_Unary_Not'),
-            ),
-            array(
-                '||' => array('precedence' => 10, 'class' => 'Twig_Node_Expression_Binary_Or', 'associativity' => \Twig_ExpressionParser::OPERATOR_LEFT),
-                '&&' => array('precedence' => 15, 'class' => 'Twig_Node_Expression_Binary_And', 'associativity' => \Twig_ExpressionParser::OPERATOR_LEFT),
-            ),
-        );
+        return [
+            [
+                '!' => ['precedence' => 50, 'class' => \Twig\Node\Expression\Unary\NotUnary::class],
+            ],
+            [
+                '||' => ['precedence' => 10, 'class' => \Twig\Node\Expression\Binary\OrBinary::class, 'associativity' => \Twig\ExpressionParser::OPERATOR_LEFT],
+                '&&' => ['precedence' => 15, 'class' => \Twig\Node\Expression\Binary\AndBinary::class, 'associativity' => \Twig\ExpressionParser::OPERATOR_LEFT],
+            ],
+        ];
     }
 
     public function getLayout() {
