@@ -10,7 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DateCalendarExtension extends AbstractTypeExtension
 {
-    public static function getExtendedType(): iterable
+    public static function getExtendedTypes()
     {
         return [ DateType::class ];
     }

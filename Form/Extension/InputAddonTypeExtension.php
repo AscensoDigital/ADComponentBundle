@@ -21,11 +21,11 @@ class InputAddonTypeExtension extends AbstractTypeExtension {
     /**
      * Returns the name of the type being extended.
      *
-     * @return string The name of the type being extended
+     * @return iterable The name of the type being extended
      */
-    public static function getExtendedType()
+    public static function getExtendedTypes()
     {
-        return FormType::class;
+        return [FormType::class];
     }
 
     /**
