@@ -22,7 +22,7 @@ class HelpTypeExtension extends AbstractTypeExtension
      *
      * @return string The name of the type being extended
      */
-    public function getExtendedType() {
+    public static function getExtendedType() {
         return FormType::class;
     }
 
