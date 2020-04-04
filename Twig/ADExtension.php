@@ -29,7 +29,7 @@ class ADExtension extends AbstractExtension {
         return array(
             new TwigFunction('ad_component_get_layout',array($this,'getLayout')),
             new TwigFunction('ad_component_get_bootstrap_version',array($this,'getVersion')),
-
+            new TwigFunction('ad_component_get_env',array($this,'getEnv'))
         );
     }
 
@@ -65,6 +65,11 @@ class ADExtension extends AbstractExtension {
 
     public function getVersion() {
         return $this->version;
+    }
+
+    public function getEnv($varname) {
+        $var = getenv($varname);
+        return $var ? $var : null;
     }
 
     public function bool2str($bool) {
