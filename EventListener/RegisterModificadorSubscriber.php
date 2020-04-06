@@ -43,11 +43,19 @@ class RegisterModificadorSubscriber implements EventSubscriber {
     {
         $entity = $args->getEntity();
         $usuario= is_null($this->tokenStorage->getToken()) || is_string($this->tokenStorage->getToken()) ? null : $this->tokenStorage->getToken()->getUser();
+
+        $getModificadorManual='getModificadorManual';
+        $modManual=method_exists($entity,$getModificadorManual) ? $entity->$getModificadorManual() : null;
+
         if(method_exists($entity, 'setModificador')) {
-            call_user_func(array($entity, 'setModificador'), is_object($usuario) ? $usuario : null);
+            call_user_func(array($entity, 'setModificador'), is_object($usuario) ? $usuario : $modManual);
         }
         if(method_exists($entity, 'setModificadorId')){
-            call_user_func(array($entity, 'setModificadorId'), is_null($usuario) || !method_exists($usuario, 'getId') ? null : $usuario->getId());
+            call_user_func(array($entity, 'setModificadorId'), is_null($usuario) || !method_exists($usuario, 'getId')
+                ? (is_null($modManual) || !method_exists($modManual,'getId')
+                    ? null
+                    : $modManual->getId())
+                : $usuario->getId());
         }
         if(method_exists($entity, 'setUpdatedAt')) {
             call_user_func(array($entity, 'setUpdatedAt'), new \DateTime());
