@@ -46,7 +46,7 @@ class StrUtil
         return str_replace('&quot;','"',utf8_decode(str_replace('À',';',$contenido)));
     }
 
-    function generatePassword($longitud = 8, $opcLetra = TRUE, $opcNumero = TRUE, $opcMayus = TRUE, $opcEspecial = TRUE){
+    public static function generatePassword($longitud = 8, $opcLetra = TRUE, $opcNumero = TRUE, $opcMayus = TRUE, $opcEspecial = TRUE){
         $letras ="abcdefghijklmnopqrstuvwxyz";
         $numeros = "1234567890";
         $letrasMayus = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
