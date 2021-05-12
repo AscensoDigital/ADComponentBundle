@@ -154,14 +154,16 @@ class StrUtil
         $words_array=explode(" ",$str);
         $ret=array();
         foreach ($words_array as $word) {
-            $first=$word[0];
-            $firstUpper=str_replace(
-                array('ñ','á','é','í','ó','ú'),
-                array('Ñ','Á','É','Í','Ó','Ú'),
-                $first
-            );
-            $word[0]=$firstUpper;
-            $ret[]=$word;
+            if(strlen($word)) {
+                $first = $word[0];
+                $firstUpper = str_replace(
+                    array('ñ', 'á', 'é', 'í', 'ó', 'ú'),
+                    array('Ñ', 'Á', 'É', 'Í', 'Ó', 'Ú'),
+                    $first
+                );
+                $word[0] = $firstUpper;
+                $ret[] = $word;
+            }
         }
         return trim(implode(' ',$ret));
     }
