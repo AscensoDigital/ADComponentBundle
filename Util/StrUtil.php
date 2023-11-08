@@ -103,20 +103,70 @@ class StrUtil
     }
 
     public static function strtolower($str){
-        $str=strtolower($str);
+        $string=strtolower($str);
+        $string = str_replace(
+            array('Á', 'À', 'Ä', 'Â'),
+            array('á', 'à', 'ä', 'â'),
+            $string
+        );
+        $string = str_replace(
+            array('É', 'È', 'Ë', 'Ê'),
+            array('é', 'è', 'ë', 'ê', ),
+            $string
+        );
+        $string = str_replace(
+            array('Í', 'Ì', 'Ï', 'Î'),
+            array('í', 'ì', 'ï', 'î'),
+            $string
+        );
+        $string = str_replace(
+            array('Ó', 'Ò', 'Ö', 'Ô'),
+            array('ó', 'ò', 'ö', 'ô'),
+            $string
+        );
+        $string = str_replace(
+            array('Ú', 'Ù', 'Û', 'Ü'),
+            array('ú', 'ù', 'û', 'ü'),
+            $string
+        );
         return str_replace(
-            array('Ñ','Á','É','Í','Ó','Ú'),
-            array('ñ','á','é','í','ó','ú') ,
-            $str
+            array('Ñ'),
+            array('ñ') ,
+            $string
         );
     }
 
     public static function strtoupper($str){
-        $str=strtoupper($str);
+        $string=strtoupper($str);
+        $string = str_replace(
+            array('á', 'à', 'ä', 'â'),
+            array('Á', 'À', 'Ä', 'Â'),
+            $string
+        );
+        $string = str_replace(
+            array('é', 'è', 'ë', 'ê'),
+            array('É', 'È', 'Ë', 'Ê'),
+            $string
+        );
+        $string = str_replace(
+            array('í', 'ì', 'ï', 'î'),
+            array('Í', 'Ì', 'Ï', 'Î'),
+            $string
+        );
+        $string = str_replace(
+            array('ó', 'ò', 'ö', 'ô'),
+            array('Ó', 'Ò', 'Ö', 'Ô'),
+            $string
+        );
+        $string = str_replace(
+            array('ú', 'ù', 'ü', 'û'),
+            array('Ú', 'Ù', 'Ü', 'Û'),
+            $string
+        );
         return str_replace(
-            array('ñ','á','é','í','ó','ú'),
-            array('Ñ','Á','É','Í','Ó','Ú'),
-            $str
+            array('ñ'),
+            array('Ñ'),
+            $string
         );
     }
 
