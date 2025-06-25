@@ -1,9 +1,7 @@
 {
     "name": "ascensodigital/component-bundle",
     "type": "symfony-bundle",
-    "description": "Symfony Bundle con extensiones de form twig y doctrine",
-    "keywords": ["bundle extensiones"],
-    "homepage": "http://ascensodigital.github.com",
+    "description": "Componentes reutilizables para Symfony 2",
     "license": "MIT",
     "authors": [
         {
@@ -12,14 +10,28 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3",
-        "symfony/symfony": "~2.7|~3.0",
-        "doctrine/orm": "~2.2,>=2.2.3|~2.5",
-        "doctrine/dbal": "<2.5|~2.5",
-        "doctrine/doctrine-bundle": "~1.4"
+        "php": ">=7.1",
+        "symfony/framework-bundle": "~2.7",
+        "symfony/form": "~2.7",
+        "symfony/twig-bundle": "~2.7",
+        "symfony/validator": "~2.7",
+        "symfony/yaml": "~2.7",
+        "doctrine/orm": "~2.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.5"
     },
     "autoload": {
-        "psr-4": { "AscensoDigital\\ComponentBundle\\": "" }
+        "psr-4": {
+            "AscensoDigital\\ComponentBundle\\": ""
+        }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "ADComponentBundle\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
     "version": "1.2.1"
 }
