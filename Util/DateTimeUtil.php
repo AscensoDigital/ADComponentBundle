@@ -11,7 +11,17 @@ namespace AscensoDigital\ComponentBundle\Util;
 
 class DateTimeUtil
 {
-    public static function generateDateTime($datetime){
+    /**
+     * @param $datetime
+     * @return \DateTime
+     * @throws \Exception
+     */
+    public static function generateDateTime($datetime)
+    {
+        if (!isset($datetime['date']) || !is_array($datetime['date'])) {
+            throw new \Error('El parámetro date es requerido y debe ser un array');
+        }
+
         $date=$datetime['date'];
         $time=isset($datetime['time']) ? $datetime['time'] : array('hour' => 0, 'minute' => 0, 'second' => 0);
         $y=$date['year'];
