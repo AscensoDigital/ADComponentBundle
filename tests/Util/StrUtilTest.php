@@ -61,5 +61,65 @@ class StrUtilTest extends TestCase
     {
         $this->assertEquals('texto simple', StrUtil::strtolower('Texto Simple'));
     }
+
+    // 🧪 strtoupper()
+    public function testStrToUpperConvierteCaracteresAcentuados()
+    {
+        $input = 'áéíóú ñ';
+        $expected = 'ÁÉÍÓÚ Ñ';
+        $this->assertEquals($expected, StrUtil::strtoupper($input));
+    }
+
+    public function testStrToUpperConTextoNormal()
+    {
+        $this->assertEquals('TEXTO SIMPLE', StrUtil::strtoupper('Texto Simple'));
+    }
+
+// 🧪 ucwords()
+    public function testUcwordsCapitalizaCorrectamenteConAcentos()
+    {
+        $input = 'árbol canción útil niño';
+        $expected = 'Árbol Canción Útil Niño';
+        $this->assertEquals($expected, StrUtil::ucwords($input));
+    }
+
+    public function testUcwordsConMayusculasIniciales()
+    {
+        $input = 'Hola Mundo';
+        $this->assertEquals('Hola Mundo', StrUtil::ucwords($input));
+    }
+
+// 🧪 formatReport()
+    public function testFormatReportReemplazaCaracteres()
+    {
+        $input = 'Este informe tiene &quot;comillas&quot; y À';
+        $expected = 'Este informe tiene "comillas" y ;';
+        $this->assertEquals($expected, StrUtil::formatReport($input));
+    }
+
+// 🧪 destacarTerm()
+    public function testDestacarTermUnaPalabra()
+    {
+        $input = 'hola mundo';
+        $term = 'hola';
+        $expected = '<strong>Hola</strong> mundo';
+        $this->assertEquals($expected, StrUtil::destacarTerm($term, $input));
+    }
+
+    public function testDestacarTermMultiplesPalabrasConAcentos()
+    {
+        $input = 'el árbol es útil en la estación';
+        $term = 'árbol útil';
+        $expected = 'el <strong>Árbol</strong> es <strong>Útil</strong> en la estación';
+        $this->assertEquals($expected, StrUtil::destacarTerm($term, $input));
+    }
+
+    public function testDestacarTermNoEncuentraTermino()
+    {
+        $input = 'nada que ver aquí';
+        $term = 'árbol';
+        $this->assertEquals($input, StrUtil::destacarTerm($term, $input));
+    }
+
 }
 

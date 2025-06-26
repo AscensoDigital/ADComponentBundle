@@ -171,19 +171,22 @@ class StrUtil
     }
 
     public static function ucwords($str){
-        $str=ucwords($str);
-        $words_array=explode(" ",$str);
-        $ret=array();
-        foreach ($words_array as $word) {
-            $first=$word[0];
-            $firstUpper=str_replace(
-                array('ñ','á','é','í','ó','ú'),
-                array('Ñ','Á','É','Í','Ó','Ú'),
-                $first
-            );
-            $word[0]=$firstUpper;
-            $ret[]=$word;
+        $words = explode(' ', $str);
+        $result = array();
+        
+        foreach ($words as $word) {
+            if (empty($word)) {
+                continue;
+            }
+            // Convertir toda la palabra a minúsculas primero
+            $word = self::strtolower($word);
+            // Luego convertir solo el primer carácter a mayúscula
+            $firstChar = mb_substr($word, 0, 1, 'UTF-8');
+            $restChars = mb_substr($word, 1, null, 'UTF-8');
+            $firstChar = self::strtoupper($firstChar);
+            $result[] = $firstChar . $restChars;
         }
-        return trim(implode(' ',$ret));
+        
+        return implode(' ', $result);
     }
 }
