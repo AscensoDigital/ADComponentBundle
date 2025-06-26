@@ -49,7 +49,7 @@ class StrUtil
      * @return mixed|$string
      *  string saneada
      */
-    public static function sanearString($string, $exclude_guion = true) {
+    public static function sanearString($string, $sanear_guion = true) {
         $string = trim($string);
         $string = str_replace(
             array('á', 'à', 'ä', 'â', 'ª', 'Á', 'À', 'Â', 'Ä'),
@@ -90,12 +90,12 @@ class StrUtil
                 "¿", "[", "^", "`", "]",
                 "+", "}", "{", "¨", "´",
                 ">", "< ", ";", ",", ":",
-                "."),
+                ".", "*"),
             '',
             $string
         );
 
-        if($exclude_guion) {
+        if($sanear_guion) {
             $string = str_replace(array("-","_"), '', $string);
         }
 
