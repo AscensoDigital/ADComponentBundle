@@ -16,6 +16,10 @@ class Distancia {
 
     public static function calcGeodesica($lat1, $long1, $lat2, $long2, $unidad=self::METROS){
 
+        if (!is_numeric($lat1) || !is_numeric($long1) || !is_numeric($lat2) || !is_numeric($long2)) {
+            return null;
+        }
+
         $degtorad = 0.01745329;
         $radtodeg = 57.29577951;
 
