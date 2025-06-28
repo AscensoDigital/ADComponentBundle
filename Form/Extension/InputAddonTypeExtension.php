@@ -39,11 +39,40 @@ class InputAddonTypeExtension extends AbstractTypeExtension {
             ->setDefined('ad_component_addon_content_type') # text|icon
             ->setDefined('ad_component_addon_content')
             ->setDefined('ad_component_addon_attr');
+
         $resolver->setDefaults([
-           'ad_component_addon_type' => ['pre' => 'text', 'post' => 'text'],
+            'ad_component_addon_type' => ['pre' => 'text', 'post' => 'text'],
             'ad_component_addon_content_type' => ['pre' => 'text', 'post' => 'text']
         ]);
+
+        // Validar addon (pre|post|both)
+        $resolver->setAllowedValues('ad_component_addon', ['pre', 'post', 'both']);
+
+        // Validar tipo del addon (text|button|icon) para pre y post
+        $resolver->setAllowedValues('ad_component_addon_type', function ($value) {
+            if (!is_array($value)) return false;
+            $valid = ['text', 'button', 'icon'];
+            foreach (['pre', 'post'] as $pos) {
+                if (isset($value[$pos]) && !in_array($value[$pos], $valid, true)) {
+                    return false;
+                }
+            }
+            return true;
+        });
+
+        // Validar tipo de contenido del addon (text|icon)
+        $resolver->setAllowedValues('ad_component_addon_content_type', function ($value) {
+            if (!is_array($value)) return false;
+            $valid = ['text', 'icon'];
+            foreach (['pre', 'post'] as $pos) {
+                if (isset($value[$pos]) && !in_array($value[$pos], $valid, true)) {
+                    return false;
+                }
+            }
+            return true;
+        });
     }
+
 
     /**
      * Pass the help to the view
