@@ -70,4 +70,11 @@ class HstoreTest extends TestCase
         $type = new Hstore();
         $this->assertEquals('hstore', $type->getSqlDeclaration([], $this->platform));
     }
+
+    public function testGetName()
+    {
+        $type = new Hstore();
+        $this->assertEquals('hstore', $type->getName());
+    }
+
 }

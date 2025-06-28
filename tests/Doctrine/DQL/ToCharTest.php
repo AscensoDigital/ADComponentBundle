@@ -34,4 +34,32 @@ class ToCharTest extends TestCase
         $sql = $node->getSql($sqlWalker);
         $this->assertEquals("to_char(created_at, 'YYYY-MM-DD')", $sql);
     }
+
+    public function testParse()
+    {
+        $node = new ToChar('to_char');
+        $parser = $this->createMock(Parser::class);
+
+        $timestampExpr = $this->getMockBuilder(\stdClass::class)->setMethods(['dispatch'])->getMock();
+        $patternExpr = $this->getMockBuilder(\stdClass::class)->setMethods(['dispatch'])->getMock();
+
+        $parser->method('match')->with($this->anything());
+
+        // 👇 Aquí está el fix importante
+        $parser->method('ArithmeticPrimary')
+            ->willReturnOnConsecutiveCalls($timestampExpr, $patternExpr);
+
+        $node->parse($parser);
+
+        $ref = new \ReflectionClass($node);
+
+        $timestampProp = $ref->getProperty('timestamp');
+        $timestampProp->setAccessible(true);
+        $this->assertSame($timestampExpr, $timestampProp->getValue($node));
+
+        $patternProp = $ref->getProperty('pattern');
+        $patternProp->setAccessible(true);
+        $this->assertSame($patternExpr, $patternProp->getValue($node));
+    }
+
 }
