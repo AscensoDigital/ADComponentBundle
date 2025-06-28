@@ -29,6 +29,24 @@ class ADComponentExtensionTest extends TestCase
         );
     }
 
+    public function testLoadWithVerticalBootstrapLayout()
+    {
+        $container = new ContainerBuilder();
+        $extension = new ADComponentExtension();
+
+        $configs = [['bootstrap_layout' => 'vertical']];
+        $extension->load($configs, $container);
+
+        $this->assertTrue($container->hasParameter('ad_component.config'));
+        $this->assertSame($configs[0], $container->getParameter('ad_component.config'));
+
+        $this->assertTrue($container->hasParameter('ad_component.bootstrap_layout'));
+        $this->assertEquals(
+            'bootstrap_3_layout.html.twig',
+            $container->getParameter('ad_component.bootstrap_layout')
+        );
+    }
+
     public function testLoadWithDefaultBootstrapLayout()
     {
         $container = new ContainerBuilder();
