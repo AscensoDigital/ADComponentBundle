@@ -1,12 +1,12 @@
 {% extends ad_component_get_layout() %}
 
 {% block form_widget -%}
-    {% spaceless %}
+    {% apply spaceless %}
         {{- parent() -}}
         {% if ad_component_help is defined and not (pre_addon is defined or pre_addon_icon is defined or post_addon is defined or post_addon_icon is defined) %}
             <div class="alert-info">{{ ad_component_help }}</div>
         {% endif %}
-    {% endspaceless %}
+    {% endapply %}
 {%- endblock form_widget %}
 
 {% block form_widget_simple -%}
@@ -19,7 +19,7 @@
                         <i {% for attrname, attrvalue in ad_component_addon_attr_pre %} {{ attrname }}="{{ attrvalue }}"{% endfor %}></i>
                     {% elseif ad_component_addon_type_pre == 'button' %}
                         {% set ad_component_addon_attr_pre = ad_component_addon_attr_pre|merge({class: (ad_component_addon_attr_pre.class|default('btn-default') ~ ' btn')|trim}) %}
-                        {% set ad_component_addon_attr_pre = ad_component_addon_attr_pre|merge({type: (ad_component_addon_attr_pre.type|default('') ~ ' button')|trim}) %}
+                        {% set ad_component_addon_attr_pre = ad_component_addon_attr_pre|merge({type: (ad_component_addon_attr_pre.type|default('button'))|trim}) %}
                         <button {% for attrname, attrvalue in ad_component_addon_attr_pre %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
                         {% if ad_component_addon_content_type_pre == 'icon' %}
                             <i class="{{ ad_component_addon_content_pre }}"></i>
@@ -40,7 +40,7 @@
                         <i {% for attrname, attrvalue in ad_component_addon_attr_post %} {{ attrname }}="{{ attrvalue }}"{% endfor %}></i>
                     {% elseif ad_component_addon_type_post == 'button' %}
                         {% set ad_component_addon_attr_post = ad_component_addon_attr_post|merge({class: (ad_component_addon_attr_post.class|default('btn-default') ~ ' btn')|trim}) %}
-                        {% set ad_component_addon_attr_post = ad_component_addon_attr_post|merge({type: (ad_component_addon_attr_post.type|default('') ~ ' button')|trim}) %}
+                        {% set ad_component_addon_attr_post = ad_component_addon_attr_post|merge({type: (ad_component_addon_attr_post.type|default('button'))|trim}) %}
                         <button {% for attrname, attrvalue in ad_component_addon_attr_post %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
                         {% if ad_component_addon_content_type_post == 'icon' %}
                             <i class="{{ ad_component_addon_content_post }}"></i>
@@ -70,6 +70,11 @@
 {% endblock %}
 
 {% block rating_widget %}
+    {% if not rating_js_loaded is defined %}
+        {% set rating_js_loaded = true %}
+        <script src="{{ asset('bundles/adcomponent/js/ad_component.jq.rating.js') }}"></script>
+    {% endif %}
+
     <span class="ad_component-rating" data-icon-base="{{ rating_icon_base }}" data-icon-check="{{ rating_icon_check }}">
         {% for i in rating_values  %}
             <i class="fa fa-2x {{ i > value ? rating_icon_base : rating_icon_check }}" data-rating="{{ i }}" data-rating-label="{{ rating_labels[i] is defined ? rating_labels[i] : i }}"></i>
