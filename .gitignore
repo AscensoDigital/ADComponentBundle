@@ -32,6 +32,9 @@
 /app/phpunit.xml
 /phpunit.xml
 
+# Informe de cobertura
+/var/coverage/
+
 # Build data
 /build/
 
