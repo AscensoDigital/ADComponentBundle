@@ -6,6 +6,10 @@ use PHPUnit\Framework\TestCase;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\Asset\PathPackage;
+use Symfony\Component\Asset\Packages;
+use Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy;
+use Symfony\Bridge\Twig\Extension\AssetExtension;
 
 class AdComponentFieldsTwigTest extends TestCase
 {
@@ -22,6 +26,8 @@ class AdComponentFieldsTwigTest extends TestCase
         $this->twig->addFunction(new \Twig\TwigFunction('ad_component_get_layout', function () {
             return 'base.html.twig'; // o cualquier layout dummy
         }));
+        $defaultPackage = new PathPackage('/assets', new EmptyVersionStrategy());
+        $this->twig->addExtension(new AssetExtension(new Packages($defaultPackage)));
 
     }
 

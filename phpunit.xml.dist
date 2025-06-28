@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit bootstrap="vendor/autoload.php"
          colors="true"
-         verbose="true"
          stopOnFailure="false"
-         convertErrorsToExceptions="true"
-         convertWarningsToExceptions="true"
-         convertNoticesToExceptions="true">
+         backupGlobals="false"
+         verbose="true">
     <testsuites>
         <testsuite name="ADComponentBundle Test Suite">
-            <directory>tests</directory>
+            <directory suffix="Test.php">./tests</directory>
         </testsuite>
     </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./</directory>
+            <exclude>
+                <directory>./tests</directory>
+                <directory>./vendor</directory>
+            </exclude>
+        </whitelist>
+    </filter>
 </phpunit>
+
+
