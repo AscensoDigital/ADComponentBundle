@@ -28,6 +28,25 @@ class InputAddonTypeExtensionTest extends TestCase
         $this->assertEquals('both', $resolved['ad_component_addon']);
     }
 
+    public function testConfigureOptionsStringAcceptsValidValues()
+    {
+        $resolver = new OptionsResolver();
+        $extension = new InputAddonTypeExtension();
+        $extension->configureOptions($resolver);
+
+        $resolved = $resolver->resolve([
+            'ad_component_addon' => 'pre',
+            'ad_component_addon_type' => 'icon',
+            'ad_component_addon_content_type' => 'text',
+            'ad_component_addon_content' => '+',
+            'ad_component_addon_attr' => ['class' => 'a']
+        ]);
+
+        $this->assertEquals('pre', $resolved['ad_component_addon']);
+        $this->assertEquals('icon', $resolved['ad_component_addon_type']);
+        $this->assertEquals('text', $resolved['ad_component_addon_content_type']);
+    }
+
     public function testDefaultValuesAreSet()
     {
         $resolver = new OptionsResolver();

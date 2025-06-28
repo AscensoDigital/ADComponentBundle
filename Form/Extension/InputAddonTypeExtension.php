@@ -50,8 +50,13 @@ class InputAddonTypeExtension extends AbstractTypeExtension {
 
         // Validar tipo del addon (text|button|icon) para pre y post
         $resolver->setAllowedValues('ad_component_addon_type', function ($value) {
-            if (!is_array($value)) return false;
             $valid = ['text', 'button', 'icon'];
+
+            if (!is_array($value)) {
+                if(in_array($value, $valid)) return true;
+                return false;
+            }
+
             foreach (['pre', 'post'] as $pos) {
                 if (isset($value[$pos]) && !in_array($value[$pos], $valid, true)) {
                     return false;
@@ -62,8 +67,13 @@ class InputAddonTypeExtension extends AbstractTypeExtension {
 
         // Validar tipo de contenido del addon (text|icon)
         $resolver->setAllowedValues('ad_component_addon_content_type', function ($value) {
-            if (!is_array($value)) return false;
             $valid = ['text', 'icon'];
+
+            if (!is_array($value)) {
+                if(in_array($value, $valid)) return true;
+                return false;
+            }
+
             foreach (['pre', 'post'] as $pos) {
                 if (isset($value[$pos]) && !in_array($value[$pos], $valid, true)) {
                     return false;
