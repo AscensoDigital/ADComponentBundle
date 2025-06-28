@@ -9,6 +9,7 @@
 namespace AscensoDigital\ComponentBundle\Validator\Constraints;
 
 
+use AscensoDigital\ComponentBundle\Util\StrUtil;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
@@ -24,7 +25,7 @@ class RutValidator extends ConstraintValidator
      */
     public function validate($value, Constraint $constraint)
     {
-        if(!$constraint instanceof Rut) {
+        if (!$constraint instanceof Rut) {
             throw new UnexpectedTypeException($constraint, "AscensoDigital\ComponentBundle\Validator\Constraints\Rut");
         }
 
@@ -32,55 +33,47 @@ class RutValidator extends ConstraintValidator
             return;
         }
 
-        $ARut=explode("-",$value);
+        // 🔧 Normalización
+        $value = strtolower(trim($value)); // quita espacios y convierte K a k
+        $value = str_replace('.', '', $value); // quita puntos
 
-        if(count($ARut) !== 2 || !ctype_alnum($ARut[0])) {
+        // Si no contiene guion, intentar insertar uno
+        if (strpos($value, '-') === false && strlen($value) > 1) {
+            $value = substr($value, 0, -1) . '-' . substr($value, -1);
+        }
+
+        $ARut = explode("-", $value);
+
+        if (count($ARut) !== 2 || !ctype_digit($ARut[0])) {
             $this->context->buildViolation($constraint->message)
                 ->setParameter('{{ rut }}', $value)
                 ->addViolation();
             return;
         }
 
-        // Verificar que la parte numérica solo contiene números
-        if(!ctype_digit($ARut[0])) {
-            $this->context->buildViolation($constraint->message)
-                ->setParameter('{{ rut }}', $value)
-                ->addViolation();
-            return;
+        $rut = (int) $ARut[0];
+        $dvIngresado = strtolower(trim($ARut[1]));
+
+        // Cálculo del dígito verificador esperado
+        $suma = 0;
+        $multiplo = 2;
+        while ($rut > 0) {
+            $suma += ($rut % 10) * $multiplo;
+            $rut = floor($rut / 10);
+            $multiplo = ($multiplo < 7) ? $multiplo + 1 : 2;
         }
 
-        $rut_leido=$ARut[0];
-        $d9=floor($rut_leido/100000000);
-        $rut_leido=$rut_leido-$d9*100000000;
-        $d8=floor($rut_leido/10000000);
-        $rut_leido=$rut_leido-$d8*10000000;
-        $d7=floor($rut_leido/1000000);
-        $rut_leido=$rut_leido-$d7*1000000;
-        $d6=floor($rut_leido/100000);
-        $rut_leido=$rut_leido-$d6*100000;
-        $d5=floor($rut_leido/10000);
-        $rut_leido=$rut_leido-$d5*10000;
-        $d4=floor($rut_leido/1000);
-        $rut_leido=$rut_leido-$d4*1000;
-        $d3=floor($rut_leido/100);
-        $rut_leido=$rut_leido-$d3*100;
-        $d2=floor($rut_leido/10);
-        $rut_leido=$rut_leido-$d2*10;
-        $d1=floor($rut_leido/1);
-        $sum=$d1*2+$d2*3+$d3*4+$d4*5+$d5*6+$d6*7+$d7*2+$d8*3+$d9*4;
-        $modu=$sum%11;
-        $dv_leido=11-$modu;
-        if ($dv_leido==11) {
-            $dv_leido = 0;
-        }
-        if ($dv_leido==10) {
-            $dv_leido = 'k';
-        }
+        $resto = $suma % 11;
+        $dvEsperado = 11 - $resto;
+        if ($dvEsperado == 11) $dvEsperado = '0';
+        elseif ($dvEsperado == 10) $dvEsperado = 'k';
+        else $dvEsperado = (string)$dvEsperado;
 
-        if ($dv_leido!=$ARut[1]) {
+        if ($dvEsperado !== $dvIngresado) {
             $this->context->buildViolation($constraint->message)
                 ->setParameter('{{ rut }}', $value)
                 ->addViolation();
         }
     }
+
 }

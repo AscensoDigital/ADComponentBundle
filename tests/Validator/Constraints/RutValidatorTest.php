@@ -66,4 +66,44 @@ class RutValidatorTest extends TestCase
 
         $this->validator->validate('abcd1234', new Rut(['message' => 'invalid']));
     }
+
+    public function testRutValidoConPuntosYGuion()
+    {
+        $this->context->expects($this->never())->method('buildViolation');
+        $this->validator->validate('11.111.111-1', new Rut(['message' => 'invalid']));
+    }
+
+    public function testRutValidoConDvMinuscula()
+    {
+        $this->context->expects($this->never())->method('buildViolation');
+        $this->validator->validate('9706122-k', new Rut(['message' => 'invalid']));
+    }
+
+    public function testRutValidoConKMayuscula()
+    {
+        $this->context->expects($this->never())->method('buildViolation');
+        $this->validator->validate('9706122-K', new Rut(['message' => 'invalid']));
+    }
+
+    public function testRutValidoConEspacios()
+    {
+        $this->context->expects($this->never())->method('buildViolation');
+        $this->validator->validate(' 11111111-1 ', new Rut(['message' => 'invalid']));
+    }
+
+    public function testRutSinDv()
+    {
+        $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $violationBuilder->expects($this->once())->method('setParameter')->willReturnSelf();
+        $violationBuilder->expects($this->once())->method('addViolation');
+
+        $this->context
+            ->expects($this->once())
+            ->method('buildViolation')
+            ->with('invalid')
+            ->willReturn($violationBuilder);
+
+        $this->validator->validate('11111111', new Rut(['message' => 'invalid']));
+    }
+
 }
