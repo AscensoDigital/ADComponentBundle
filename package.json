@@ -1,0 +1,35 @@
+{
+  "name": "adcomponentbundle",
+  "version": "1.0.0",
+  "description": "Componentes adicionales para forms, doctrine y twig",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "karma start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AscensoDigital/ADComponentBundle.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AscensoDigital/ADComponentBundle/issues"
+  },
+  "homepage": "https://github.com/AscensoDigital/ADComponentBundle#readme",
+  "devDependencies": {
+    "jasmine-core": "^5.8.0",
+    "karma": "^6.4.4",
+    "karma-chrome-launcher": "^3.2.0",
+    "karma-cli": "^2.0.0",
+    "karma-coverage": "^2.2.1",
+    "karma-jasmine": "^5.1.0",
+    "karma-sourcemap-loader": "^0.4.0",
+    "karma-webpack": "^5.0.1",
+    "webpack": "^5.99.9",
+    "webpack-cli": "^6.0.1"
+  }
+}

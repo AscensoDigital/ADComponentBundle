@@ -34,6 +34,7 @@
 
 # Informe de cobertura
 /var/coverage/
+/coverage/
 
 # Build data
 /build/
