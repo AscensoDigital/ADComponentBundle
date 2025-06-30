@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>ADComponent Utils Debug</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        .output {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f9f9f9;
+            border: 1px dashed #aaa;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+<h2>Debug: ADComponent Utils</h2>
+
+<section>
+    <h3>msgAlert</h3>
+    <label>
+        Nivel:
+        <input type="text" id="alert-level" value="warning">
+    </label>
+    <label>
+        Mensaje:
+        <input type="text" id="alert-msg" value="Este es un mensaje de alerta.">
+    </label>
+    <button onclick="testMsgAlert()">Generar</button>
+    <div id="alert-output" class="output"></div>
+</section>
+
+<hr>
+
+<section>
+    <h3>msgLabel</h3>
+    <label>
+        Label:
+        <input type="text" id="label-text" value="Importante">
+    </label>
+    <label>
+        Nivel:
+        <input type="text" id="label-level" value="info">
+    </label>
+    <label>
+        Mensaje:
+        <input type="text" id="label-msg" value="Mensaje relacionado.">
+    </label>
+    <button onclick="testMsgLabel()">Generar</button>
+    <div id="label-output" class="output"></div>
+</section>
+
+<hr>
+
+<section>
+    <h3>object2Array</h3>
+    <label>
+        Objeto JSON:
+        <textarea id="obj-input" rows="4" cols="50">{ "a": 1, "b": { "c": 2, "d": { "e": 3 } } }</textarea>
+    </label>
+    <button onclick="testObject2Array()">Convertir</button>
+    <div id="obj-output" class="output"></div>
+</section>
+
+<script src="../js/ad_component.utils.js"></script>
+<script>
+    function testMsgAlert() {
+        const level = document.getElementById('alert-level').value;
+        const msg = document.getElementById('alert-msg').value;
+        const result = ADComponent.msgAlert(level, msg);
+        document.getElementById('alert-output').innerHTML = result;
+        if (window.DEBUG) console.log('[msgAlert]', result);
+    }
+
+    function testMsgLabel() {
+        const label = document.getElementById('label-text').value;
+        const level = document.getElementById('label-level').value;
+        const msg = document.getElementById('label-msg').value;
+        const result = ADComponent.msgLabel(label, level, msg);
+        document.getElementById('label-output').innerHTML = result;
+        if (window.DEBUG) console.log('[msgLabel]', result);
+    }
+
+    function testObject2Array() {
+        const raw = document.getElementById('obj-input').value;
+        try {
+            const obj = JSON.parse(raw);
+            const result = ADComponent.object2Array(obj);
+            document.getElementById('obj-output').textContent = JSON.stringify(result, null, 2);
+            if (window.DEBUG) console.log('[object2Array]', result);
+        } catch (e) {
+            document.getElementById('obj-output').textContent = '❌ JSON inválido';
+        }
+    }
+
+    // Modo debug
+    window.DEBUG = true;
+</script>
+</body>
+</html>
