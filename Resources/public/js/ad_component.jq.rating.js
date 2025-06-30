@@ -1,5 +1,6 @@
 /**
  * Created by claudio on 08-06-17.
+ * DEPRECATED usar version javascript puro para eliminar dependencia de jquery
  */
 $(document).ready(function(){
     var rating=$('.ad_component-rating');

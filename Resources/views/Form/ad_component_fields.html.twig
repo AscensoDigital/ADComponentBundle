@@ -72,7 +72,7 @@
 {% block rating_widget %}
     {% if not rating_js_loaded is defined %}
         {% set rating_js_loaded = true %}
-        <script src="{{ asset('bundles/adcomponent/js/ad_component.jq.rating.js') }}"></script>
+        <script src="{{ asset('bundles/adcomponent/js/ad_component.rating.js') }}"></script>
     {% endif %}
 
     <span class="ad_component-rating" data-icon-base="{{ rating_icon_base }}" data-icon-check="{{ rating_icon_check }}">

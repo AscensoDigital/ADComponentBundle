@@ -3,10 +3,23 @@ module.exports = function(config) {
         basePath: '',
         frameworks: ['jasmine'],
         files: [
+            'vendor/components/jquery/jquery-3.0.0.js',
             // Cargar como script puro
             {
                 pattern: 'Resources/public/js/ad_component.utils.js',
                 included: true,
+                served: true,
+                watched: false
+            },
+            {
+                pattern: 'Resources/public/js/ad_component.jq.rating.js',
+                included: true,
+                served: true,
+                watched: false
+            },
+            {
+                pattern: 'Resources/public/js/ad_component.rating.js',
+                    included: true,
                 served: true,
                 watched: false
             },
@@ -18,6 +31,8 @@ module.exports = function(config) {
         ],
         preprocessors: {
             'Resources/public/js/ad_component.utils.js': ['coverage'],
+            'Resources/public/js/ad_component.jq.rating.js': ['coverage'],
+            'Resources/public/js/ad_component.rating.js': ['coverage'],
             'tests/js/**/*.spec.js': ['webpack', 'sourcemap']
         },
         plugins: [
