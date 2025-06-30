@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>ADComponent Rating Debug</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+    <style>
+        .ad_component-rating i {
+            font-size: 2rem;
+            cursor: pointer;
+            color: gold;
+            margin-right: 0.2rem;
+        }
+        .ad_component-rating-label {
+            display: inline-block;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<h2>ADComponent Rating Debug (JS Vanilla)</h2>
+
+<div class="ad_component-rating" style="margin-bottom: 2rem;">
+    <span data-icon-base="fa-star-o" data-icon-check="fa-star">
+      <input type="hidden" value="0" />
+      <i data-rating="1" data-rating-label="Malo" class="fa fa-star-o"></i>
+      <i data-rating="2" data-rating-label="Regular" class="fa fa-star-o"></i>
+      <i data-rating="3" data-rating-label="Bueno" class="fa fa-star-o"></i>
+      <i data-rating="4" data-rating-label="Muy bueno" class="fa fa-star-o"></i>
+      <i data-rating="5" data-rating-label="Excelente" class="fa fa-star-o"></i>
+        <span class="ad_component-rating-label"></span>
+    </span>
+</div>
+
+<script>
+    // Debug visual: mostrar logs de eventos
+    window.DEBUG = true;
+</script>
+<script src="../js/ad_component.rating.js"></script>
+</body>
+</html>

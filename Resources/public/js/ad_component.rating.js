@@ -16,6 +16,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 inputHidden.value = valor;
                 ratingLabel.textContent = label;
 
+                if (window.DEBUG) {
+                    console.log('[CLICK] Valor:', valor, '| Label:', label);
+                }
+
                 span.querySelectorAll('i').forEach(function (i) {
                     if (parseInt(i.dataset.rating) <= valor) {
                         i.classList.remove(iconBase);
@@ -39,6 +43,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 var iconCheck = span.dataset.iconCheck;
 
                 ratingLabel.textContent = label;
+
+                if (window.DEBUG) {
+                    console.log('[HOVER] Preview:', valor, '| Label:', label);
+                }
 
                 span.querySelectorAll('i').forEach(function (i) {
                     if (parseInt(i.dataset.rating) <= valor) {
@@ -77,6 +85,10 @@ document.addEventListener('DOMContentLoaded', function () {
                         i.classList.add(iconBase);
                     }
                 });
+
+                if (window.DEBUG) {
+                    console.log('[OUT] Valor restaurado:', valor);
+                }
             }
         });
     });
