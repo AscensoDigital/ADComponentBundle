@@ -16,8 +16,8 @@
         "symfony/twig-bundle": "~2.7",
         "symfony/validator": "~2.7",
         "symfony/yaml": "~2.7",
-        "doctrine/orm": "~2.5",
-        "doctrine/dbal": "~2.5",
+        "doctrine/orm": "~2.2,>=2.2.3,<2.5",
+        "doctrine/dbal": "<2.5",
         "doctrine/doctrine-bundle": "~1.4"
     },
     "require-dev": {
@@ -36,5 +36,5 @@
     },
     "minimum-stability": "stable",
     "prefer-stable": true,
-    "version": "1.2.4"
+    "version": "1.2.5"
 }
