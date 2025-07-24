@@ -1,8 +1,10 @@
 <?php
 
 namespace AscensoDigital\ComponentBundle\Tests\Form\Extension;
-
+use Symfony\Component\Form\Forms;
+use Symfony\Component\Form\PreloadedExtension;
 use AscensoDigital\ComponentBundle\Form\Extension\InputAddonTypeExtension;
+
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
@@ -11,6 +13,21 @@ use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 
 class InputAddonTypeExtensionTest extends TestCase
 {
+
+
+    protected function setUp(): void
+    {
+        $this->factory = \Symfony\Component\Form\Forms::createFormFactoryBuilder()
+            ->addExtensions([
+                new \Symfony\Component\Form\PreloadedExtension([], [
+                    \Symfony\Component\Form\Extension\Core\Type\TextType::class => [new \AscensoDigital\ComponentBundle\Form\Extension\InputAddonTypeExtension()],
+                ])
+            ])
+            ->getFormFactory();
+    }
+
+
+
     public function testConfigureOptionsAcceptsValidValues()
     {
         $resolver = new OptionsResolver();
@@ -140,4 +157,26 @@ class InputAddonTypeExtensionTest extends TestCase
             $this->assertEquals('Symfony\Component\Form\Extension\Core\Type\FormType', $extension->getExtendedType());
         }
     }
+
+    public function testInvalidAddonTypeLiteralThrowsException(): void
+    {
+        $this->expectException(\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException::class);
+
+        $form = $this->factory->create(\Symfony\Component\Form\Extension\Core\Type\TextType::class, null, [
+            'ad_component_addon' => 'pre',
+            'ad_component_addon_type' => 'invalid',
+        ]);
+    }
+
+    public function testInvalidAddonContentTypeLiteralThrowsException(): void
+    {
+        $this->expectException(\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException::class);
+
+        $form = $this->factory->create(\Symfony\Component\Form\Extension\Core\Type\TextType::class, null, [
+            'ad_component_addon' => 'post',
+            'ad_component_addon_type' => 'button',
+            'ad_component_addon_content_type' => 'invalido',
+        ]);
+    }
+
 }
